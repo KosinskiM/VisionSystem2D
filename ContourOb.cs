@@ -11,7 +11,8 @@ using OpenCvSharp;
 using NumSharp;
 using Point = OpenCvSharp.Point;
 
-namespace SystemWizyjny
+
+namespace Clear_version_robotApp
 {
     class ContourOb
     {
@@ -20,12 +21,11 @@ namespace SystemWizyjny
         public Point center;        //srodek konturu
         public OpenCvSharp.Point2d realCenter;    //rzeczywisty srodek konturu
         public float angle;         //obrot konturu od osi x
+        public float realAngle;
         public string color;        //kolor konturu
         public string shape;        //ksztalt konturu
         public OpenCvSharp.Point[] corners;  //cornery
         public OpenCvSharp.Point[] contour;  //wszystkie punkty konturu
         public int[] collisions;
-
     }
-
 }
