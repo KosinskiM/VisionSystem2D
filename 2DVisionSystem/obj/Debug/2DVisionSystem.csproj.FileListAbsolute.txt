@@ -89,3 +89,14 @@ C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\2DVisionSystem.csproj.CoreCo
 C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\2DVisionSystem.csproj.CopyComplete
 C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\2DVisionSystem.exe
 C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\2DVisionSystem.pdb
+C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\VisionSystem.LivePreviewForm.resources
+C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\VisionSystem.UIComponents.CalibrationMethodsBox.resources
+C:\Projects\2DVisionSystem\2DVisionSystem\obj\Debug\VisionSystem.Views.CalibrationConsoles.resources
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Security.AccessControl.dll
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Security.Permissions.dll
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Security.Principal.Windows.dll
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Security.AccessControl.xml
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Security.Permissions.xml
+C:\Projects\2DVisionSystem\2DVisionSystem\bin\Debug\System.Security.Principal.Windows.xml

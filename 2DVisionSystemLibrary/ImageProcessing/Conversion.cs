@@ -16,5 +16,11 @@ namespace VisionSystemLibrary.ImageProcessing
             return OpenCvSharp.Extensions.BitmapConverter.ToBitmap(image);
         }
 
+        public static Mat BitmapToMat(Image image)
+        {
+            return OpenCvSharp.Extensions.BitmapConverter.ToMat((Bitmap)image);
+        }
+
+
     }
 }

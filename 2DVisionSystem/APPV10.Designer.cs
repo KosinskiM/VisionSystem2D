@@ -1000,6 +1000,7 @@ namespace Clear_version_robotApp
             this.label7.Size = new System.Drawing.Size(198, 13);
             this.label7.TabIndex = 22;
             this.label7.Text = "Upper Connected objects volume bound";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
@@ -1010,6 +1011,7 @@ namespace Clear_version_robotApp
             this.label8.Size = new System.Drawing.Size(138, 13);
             this.label8.TabIndex = 20;
             this.label8.Text = "Upper object volume bound";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // textBox3
             // 
@@ -1049,6 +1051,7 @@ namespace Clear_version_robotApp
             this.label9.Size = new System.Drawing.Size(138, 13);
             this.label9.TabIndex = 18;
             this.label9.Text = "Lower object volume bound";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // groupBox7
             // 

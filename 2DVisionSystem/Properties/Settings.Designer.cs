@@ -22,5 +22,14 @@ namespace VisionSystem.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Projects\\2DVisionSystem\\sample")]
+        public string sampleImagesPath {
+            get {
+                return ((string)(this["sampleImagesPath"]));
+            }
+        }
     }
 }

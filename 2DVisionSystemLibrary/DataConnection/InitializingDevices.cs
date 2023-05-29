@@ -19,6 +19,5 @@ namespace VisionSystemLibrary.DataConnection
         {
             return new List<DsDevice>(DsDevice.GetDevicesOfCat(FilterCategory.VideoInputDevice));
         }
-
     }
 }
