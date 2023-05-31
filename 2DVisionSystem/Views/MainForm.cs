@@ -14,12 +14,15 @@ using VisionSystemLibrary.ImageProcessing;
 using VisionSystemLibrary.DataConnection;
 using VisionSystem;
 using _2DVisionSystemLibrary.DataConnection;
+using VisionSystem.Models;
 
 namespace _2DVisionSystem
 {
     public partial class MainForm : Form
     {
-        double[,] CameraMatrix = new double[3,3];
+        VisionSystemController VisionSystemController = new VisionSystemController();
+
+        double[,] CameraMatrix = new double[3, 3];
 
         //Child Forms
         private LivePreviewForm LivePreview;
@@ -32,6 +35,8 @@ namespace _2DVisionSystem
             InitializePictureBoxes();
             InitializeDropDowns();
             InitializeCameraMatrixGroupbox();
+            InitializeCalibrationConsoles();
+            HomeTabConsoleWrite("Application Started");
         }
         //Main Form events
         public void MainForm_Closing(object sender, CancelEventArgs e)
@@ -43,6 +48,7 @@ namespace _2DVisionSystem
         //Main Form Initialization
         private void InitializePictureBoxes()
         {
+            //TODO use IO to load image !
             homePictureBox.Size = new System.Drawing.Size(690, 730);
             homePictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
             homePictureBox.Image = Conversion.MatToBitmap(Cv2.ImRead(@"C:\Projects\2DVisionSystem\2DVisionSystem\UIComponents\HomePagePicture.jpg"));
@@ -73,6 +79,32 @@ namespace _2DVisionSystem
 
             ReadCameraMatrix();
         }
+        private void InitializeCalibrationConsoles()
+        {
+            calibrationMethodsBox.ConsolesControl = calibrationConsoles;
+        }
+
+
+
+        //Main Form Home Tab
+
+        //Home Tab console
+        private void HomeTabConsoleWrite(string text)
+        {
+            StringBuilder content = new StringBuilder();
+            content.Append(homeTabConsole.Text);
+            //messge = 1#   Live Preview Window opened
+            int lineCounter = 0;
+            for (int i = 0; i < content.Length; i++)
+            {
+                if (content[i] == '\n')
+                {
+                    lineCounter++;
+                }
+            }
+            content.AppendLine($"{ lineCounter }#   " + text);
+            homeTabConsole.Text = content.ToString();
+        }
 
         //Camera Matrix Group Box
         private void changeCameraMatrixButton_Click(object sender, EventArgs e)
@@ -81,6 +113,7 @@ namespace _2DVisionSystem
             if (ValidateCameraMatrix())
             {
                 ReadCameraMatrix();
+                HomeTabConsoleWrite("Camera Matrix in Vision System changed");
             }
             else
             {
@@ -114,6 +147,7 @@ namespace _2DVisionSystem
             cameraMatrix33.Text = "1";
 
             ReadCameraMatrix();
+            HomeTabConsoleWrite("Default Camera Matrix values restored");
 
         }
         private bool ValidateCameraMatrix()
@@ -137,15 +171,6 @@ namespace _2DVisionSystem
             return true;
         }
 
-
-        /// ToolStripMenu
-        private void introductionToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form Introduction = new IntroductionForm();
-            Introduction.Show();
-        }
-
-
         //Camera Connection
         private void connectCameraButton_Click(object sender, EventArgs e)
         {
@@ -153,6 +178,7 @@ namespace _2DVisionSystem
             {
                 int selectedCamera = availableCamerasDropDown.SelectedIndex;
                 ImageAquisition.OpenCapture(selectedCamera,CameraMatrix);
+                HomeTabConsoleWrite($"Connected with { availableCamerasDropDown.SelectedItem } Camera");
             }
             else
             {
@@ -164,6 +190,7 @@ namespace _2DVisionSystem
             try
             {
                 ImageAquisition.ReleseResources();
+                HomeTabConsoleWrite($"Disconnected with { availableCamerasDropDown.SelectedItem } Camera");
             }
             catch (Exception ex)
             {
@@ -178,6 +205,7 @@ namespace _2DVisionSystem
             {
                 string selectedComPort  = availableComPortsDropDown.SelectedItem.ToString();
                 Connections.OpenComPortConnection(selectedComPort);
+                HomeTabConsoleWrite($"Connected with { availableComPortsDropDown.SelectedItem } Com Port");
             }
             catch (Exception ex)
             {
@@ -189,7 +217,7 @@ namespace _2DVisionSystem
             try
             {
                 Connections.CloseComPortConnection();
-
+                HomeTabConsoleWrite($"Connected with { availableComPortsDropDown.SelectedItem } Com Port");
             }
             catch (Exception ex)
             {
@@ -202,25 +230,52 @@ namespace _2DVisionSystem
 
 
 
+        /// ToolStripMenu
+        private void introductionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form Introduction = new IntroductionForm();
+            Introduction.Show();
+        }
+
+
+
+
+
+
+
+
         //LivePreview Controls
         private void livePreviewButton_Click(object sender, EventArgs e)
         {
-            LivePreview = new LivePreviewForm();
-            LivePreview.Show();
-            calibrationMethodsBox.LivePreview = LivePreview;
-            calibrationConsoles.ConsoleWriteLines("Live Preview Window opened");
+            if (LivePreview == null)
+            {
+                LivePreview = new LivePreviewForm();
+                LivePreview.Show();
+                calibrationMethodsBox.LivePreview = LivePreview;
+                calibrationMethodsBox.VisionController = VisionSystemController;
+                calibrationConsoles.ConsoleWriteLines("Live Preview Window opened");
+            }
+            else MessageBox.Show("Live Preview Window is already opened");
         }
 
         private void startLivePreviewButton_Click(object sender, EventArgs e)
         {
-            LivePreview.StartPreview();
-            calibrationConsoles.ConsoleWriteLines("Live Preview Started ");
+            if (LivePreview != null)
+            {
+                LivePreview.StartPreview();
+                calibrationConsoles.ConsoleWriteLines("Live Preview Started "); 
+            }
+            else MessageBox.Show("Please open Live Preview Window first");
         }
 
         private void stopLivePreviewButton_Click(object sender, EventArgs e)
         {
-            LivePreview.StopPreview();
-            calibrationConsoles.ConsoleWriteLines("Live Preview stopped");
+            if (LivePreview != null)
+            {
+                LivePreview.StopPreview();
+                calibrationConsoles.ConsoleWriteLines("Live Preview stopped");
+            }
+            else MessageBox.Show("Please open Live Preview Window first");
         }
 
         private void captureImageButton_Click(object sender, EventArgs e)
@@ -229,33 +284,42 @@ namespace _2DVisionSystem
             {
                 Bitmap img = ImageAquisition.CaptureImage();
                 LivePreview.Photo = img;
+                VisionSystemController.SetBaseImage(img);
+                calibrationConsoles.ConsoleWriteLines("Image captured");
             }
-            calibrationConsoles.ConsoleWriteLines("Image captured");
-
+            else MessageBox.Show("Please open Live Preview Window first");
         }
 
         private void loadSampleImg_Click(object sender, EventArgs e)
         {
-            int selectedIndex = sampleImageDropDown.SelectedIndex;
-            LivePreview.LoadSampleImage(selectedIndex);
+            if (LivePreview != null)
+            {
+                int selectedIndex = sampleImageDropDown.SelectedIndex;
+                LivePreview.LoadSampleImage(selectedIndex);
+                Image img = LivePreview.Photo;
+                VisionSystemController.SetBaseImage(img);
+                calibrationConsoles.ConsoleWriteLines($"Sample Image { sampleImageDropDown.SelectedItem } Loaded");
+            }
+            else MessageBox.Show("Please open Live Preview Window first");
         }
 
 
         private void defaultValuesButton_Click_1(object sender, EventArgs e)
         {
             calibrationMethodsBox.DefaultValues();
-            calibrationConsoles.ConsoleWriteLines("Default values applied");
         }
 
         private void resetCalibrationButton_Click(object sender, EventArgs e)
         {
             calibrationMethodsBox.ResetCalibration();
-            calibrationConsoles.ConsoleWriteLines("Calibration restarted");
         }
 
         private void calibrationMethodsBox_Load(object sender, EventArgs e)
         {
 
         }
+
+
+
     }
 }

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VisionSystem.Models;
 using VisionSystemLibrary.DataConnection;
 
 namespace VisionSystemLibrary.ImageProcessing
@@ -45,7 +46,6 @@ namespace VisionSystemLibrary.ImageProcessing
             Bitmap output = Conversion.MatToBitmap(undistorted);
             input.Dispose();
             undistorted.Dispose();
-
             return output;
         }
         

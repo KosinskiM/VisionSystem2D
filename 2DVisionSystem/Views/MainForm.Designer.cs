@@ -79,6 +79,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.homeTabConsoleGroupBox = new System.Windows.Forms.GroupBox();
+            this.homeTabConsole = new System.Windows.Forms.RichTextBox();
             this.calibrationMethodsBox = new VisionSystem.UIComponents.CalibrationMethodsBox();
             this.calibrationConsoles = new VisionSystem.Views.CalibrationConsoles();
             ((System.ComponentModel.ISupportInitialize)(this.homePictureBox)).BeginInit();
@@ -97,6 +99,7 @@
             this.livePreviewGroupBox.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.homeTabConsoleGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // homePictureBox
@@ -107,7 +110,7 @@
             this.homePictureBox.Location = new System.Drawing.Point(27, 76);
             this.homePictureBox.Margin = new System.Windows.Forms.Padding(6);
             this.homePictureBox.Name = "homePictureBox";
-            this.homePictureBox.Size = new System.Drawing.Size(722, 707);
+            this.homePictureBox.Size = new System.Drawing.Size(722, 679);
             this.homePictureBox.TabIndex = 0;
             this.homePictureBox.TabStop = false;
             // 
@@ -138,6 +141,7 @@
             // 
             // homeTab
             // 
+            this.homeTab.Controls.Add(this.homeTabConsoleGroupBox);
             this.homeTab.Controls.Add(this.connectionGroupBox);
             this.homeTab.Controls.Add(this.imageGroupBox);
             this.homeTab.Controls.Add(this.titleLabel);
@@ -156,11 +160,11 @@
             this.connectionGroupBox.Controls.Add(this.availableComPortsLabel);
             this.connectionGroupBox.Controls.Add(this.connectComPortButton);
             this.connectionGroupBox.Controls.Add(this.availableComPortsDropDown);
-            this.connectionGroupBox.Location = new System.Drawing.Point(786, 491);
+            this.connectionGroupBox.Location = new System.Drawing.Point(778, 372);
             this.connectionGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.connectionGroupBox.Name = "connectionGroupBox";
             this.connectionGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.connectionGroupBox.Size = new System.Drawing.Size(701, 342);
+            this.connectionGroupBox.Size = new System.Drawing.Size(705, 312);
             this.connectionGroupBox.TabIndex = 6;
             this.connectionGroupBox.TabStop = false;
             this.connectionGroupBox.Text = "Connection with robot via Com Port";
@@ -217,11 +221,11 @@
             this.imageGroupBox.Controls.Add(this.disconnectCameraButton);
             this.imageGroupBox.Controls.Add(this.enterCameraMatrixGroupBox);
             this.imageGroupBox.Controls.Add(this.availableCamerasDropDown);
-            this.imageGroupBox.Location = new System.Drawing.Point(786, 76);
+            this.imageGroupBox.Location = new System.Drawing.Point(782, 22);
             this.imageGroupBox.Margin = new System.Windows.Forms.Padding(2);
             this.imageGroupBox.Name = "imageGroupBox";
             this.imageGroupBox.Padding = new System.Windows.Forms.Padding(2);
-            this.imageGroupBox.Size = new System.Drawing.Size(701, 351);
+            this.imageGroupBox.Size = new System.Drawing.Size(701, 315);
             this.imageGroupBox.TabIndex = 5;
             this.imageGroupBox.TabStop = false;
             this.imageGroupBox.Text = "Image aquisition - camera";
@@ -645,6 +649,24 @@
             this.statusProgressBar.Name = "statusProgressBar";
             this.statusProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
+            // homeTabConsoleGroupBox
+            // 
+            this.homeTabConsoleGroupBox.Controls.Add(this.homeTabConsole);
+            this.homeTabConsoleGroupBox.Location = new System.Drawing.Point(778, 679);
+            this.homeTabConsoleGroupBox.Name = "homeTabConsoleGroupBox";
+            this.homeTabConsoleGroupBox.Size = new System.Drawing.Size(700, 112);
+            this.homeTabConsoleGroupBox.TabIndex = 7;
+            this.homeTabConsoleGroupBox.TabStop = false;
+            this.homeTabConsoleGroupBox.Text = "Console";
+            // 
+            // homeTabConsole
+            // 
+            this.homeTabConsole.Location = new System.Drawing.Point(15, 30);
+            this.homeTabConsole.Name = "homeTabConsole";
+            this.homeTabConsole.Size = new System.Drawing.Size(665, 68);
+            this.homeTabConsole.TabIndex = 0;
+            this.homeTabConsole.Text = "";
+            // 
             // calibrationMethodsBox
             // 
             this.calibrationMethodsBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -700,6 +722,7 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.homeTabConsoleGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -759,6 +782,8 @@
         private VisionSystem.UIComponents.CalibrationMethodsBox calibrationMethodsBox;
         private System.Windows.Forms.Button resetCalibrationButton;
         private VisionSystem.Views.CalibrationConsoles calibrationConsoles;
+        private System.Windows.Forms.GroupBox homeTabConsoleGroupBox;
+        private System.Windows.Forms.RichTextBox homeTabConsole;
     }
 }
 

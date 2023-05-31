@@ -19,7 +19,7 @@ namespace VisionSystem.Views
 
 
         //TODO take some code to class
-        public void ConsoleWriteLines(string lines)
+        public void ConsoleWriteLines(string text)
         {
             StringBuilder content = new StringBuilder();
             content.Append(consoleTextBox.Text);
@@ -32,7 +32,7 @@ namespace VisionSystem.Views
                     lineCounter++;
                 }
             }
-            content.AppendLine($"{ lineCounter }#   "+ lines);
+            content.AppendLine($"{ lineCounter }#   "+ text);
 
             consoleTextBox.Text = content.ToString();
         }
