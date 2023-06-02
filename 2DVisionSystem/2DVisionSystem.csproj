@@ -110,6 +110,8 @@
     <Compile Include="APPV10.Designer.cs">
       <DependentUpon>APPV10.cs</DependentUpon>
     </Compile>
+    <Compile Include="CONNECT.cs" />
+    <Compile Include="ContourOb.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="Views\CalibrationConsoles.cs">
       <SubType>UserControl</SubType>
@@ -143,6 +145,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VISION.cs" />
     <EmbeddedResource Include="APPV10.resx">
       <DependentUpon>APPV10.cs</DependentUpon>
     </EmbeddedResource>

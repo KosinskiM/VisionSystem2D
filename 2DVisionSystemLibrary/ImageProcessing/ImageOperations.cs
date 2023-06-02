@@ -13,7 +13,8 @@ namespace VisionSystemLibrary.ImageProcessing
     {
         public static Image ApplyGreyScale(VisionSystemController VisionController)
         {
-            Mat original = VisionController.BaseImage;
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
             Mat refGray = new Mat();
             Mat gaus = new Mat();
             Mat thresh = new Mat();
@@ -21,13 +22,13 @@ namespace VisionSystemLibrary.ImageProcessing
             //TODO prevent thresholding greyscale image !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             //konwersja na odcienie szarosci
-            Cv2.CvtColor(original, refGray, ColorConversionCodes.BGR2GRAY);
+            Cv2.CvtColor(baseImageCopy, refGray, ColorConversionCodes.BGR2GRAY);
             //blur 
             OpenCvSharp.Size kernel = new OpenCvSharp.Size(3, 3);
             //Cv2.GaussianBlur(refGray, gaus, kernel,0,0);
             Cv2.MorphologyEx(refGray, gaus, MorphTypes.Close, null);
             //tresh 127 - 255
-            Cv2.Threshold(gaus, thresh, VisionController.LowerThreshold, VisionController.UpperThreshold, ThresholdTypes.BinaryInv);
+            Cv2.Threshold(gaus, thresh, (double)VisionController.LowerThreshold, (double)VisionController.UpperThreshold, ThresholdTypes.BinaryInv);
             VisionController.SetGreyScaleImage(thresh);
             Image output = Conversion.MatToBitmap(thresh);
 
@@ -35,7 +36,8 @@ namespace VisionSystemLibrary.ImageProcessing
         }
         public static Image FindContours(VisionSystemController VisionController)
         {
-            Mat baseImageCopy = VisionController.BaseImage;
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
             HierarchyIndex[] hIndx;
             OpenCvSharp.Point[][] contours;
             
@@ -57,21 +59,22 @@ namespace VisionSystemLibrary.ImageProcessing
         }
         public static Image SortContoursOnVolume(VisionSystemController VisionController)
         {
-            Mat baseImageCopy = VisionController.BaseImage;
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
             OpenCvSharp.Point[][] contours = VisionController.contours;
-            int lowerVolume = VisionController.LowerVolume;
-            int upperVolume = VisionController.UpperVolume;
-            int bigContourVolume = VisionController.BigContourVolume;
+            double lowerVolume = (double)VisionController.LowerVolume;
+            double upperVolume = (double)VisionController.UpperVolume;
+            double bigContourVolume = (double)VisionController.BigContourVolume;
 
 
-            int small, connected;
+            int smallCount, connectedCount;
             OpenCvSharp.Point punkt;
             OpenCvSharp.Point[][] smallContours;
             OpenCvSharp.Point[][] connectedContours;
             OpenCvSharp.Point[][] smallContoursSorted;
             OpenCvSharp.Point[][] connectedContoursSorted;
 
-            (baseImageCopy, small, connected) = DrawContoursOnVolume(baseImageCopy, contours, lowerVolume, upperVolume, bigContourVolume);
+            (baseImageCopy, smallCount, connectedCount) = DrawContoursOnVolume(baseImageCopy, contours, lowerVolume, upperVolume, bigContourVolume);
             //(smallContours, connectedContours) = SortStoredContours(contours, lowerVolume, upperVolume, bigContourVolume, small, connected);
             //(smallContoursSorted, connectedContoursSorted) = LeftSortContours(smallContours, connectedContours);
 
@@ -105,7 +108,7 @@ namespace VisionSystemLibrary.ImageProcessing
         /// <param name="Mid"></param>
         /// <param name="Bupper"></param>
         /// <returns></returns>
-        public static (Mat, int, int) DrawContoursOnVolume(Mat imageClone, OpenCvSharp.Point[][] contours, int Slower, int Mid, int Bupper)
+        public static (Mat, int, int) DrawContoursOnVolume(Mat imageClone, OpenCvSharp.Point[][] contours, double Slower, double Mid, double Bupper)
         {
             //contours counters
             int smallContoursCounter = 0;
@@ -113,12 +116,14 @@ namespace VisionSystemLibrary.ImageProcessing
 
             for (int i = 0; i < contours.Length; i++)
             {
-                if (Cv2.ContourArea(contours[i]) > Slower && Cv2.ContourArea(contours[i]) <= Mid)
+                var contourVolume = Cv2.ContourArea(contours[i]);
+
+                if (contourVolume > Slower && contourVolume <= Mid)
                 {
                     Cv2.DrawContours(imageClone, contours, i, new Scalar(0, 255, 0), thickness: 4);
                     smallContoursCounter++;
                 }
-                else if (Cv2.ContourArea(contours[i]) > Mid && Cv2.ContourArea(contours[i]) <= Bupper)
+                else if (contourVolume > Mid && contourVolume <= Bupper)
                 {
                     Cv2.DrawContours(imageClone, contours, i, new Scalar(255, 0, 0), thickness: 4);
                     connectedContoursCounter++;

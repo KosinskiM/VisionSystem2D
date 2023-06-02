@@ -36,12 +36,12 @@ namespace VisionSystem.Models
             get;
             private set;
         }
-        public int LowerThreshold
+        public double? LowerThreshold
         {
             get;
             private set;
         }
-        public int UpperThreshold
+        public double? UpperThreshold
         {
             get;
             private set;
@@ -53,17 +53,17 @@ namespace VisionSystem.Models
             get;
             private set;
         }
-        public int LowerVolume
+        public double? LowerVolume
         {
             get;
             private set;
         }
-        public int UpperVolume
+        public double? UpperVolume
         {
             get;
             private set;
         }
-        public int BigContourVolume
+        public double? BigContourVolume
         {
             get;
             private set;
@@ -98,20 +98,45 @@ namespace VisionSystem.Models
             ContourVolumeStored = false;
         }
 
-        public void SetThreshold(string lowerThreshold, string upperThreshold)
-        {
-            LowerThreshold = Convert.ToInt32(lowerThreshold);
-            UpperThreshold = Convert.ToInt32(upperThreshold);
-            ThresholdValuesStored = true;
-        }
+        //Base image
         public void SetBaseImage(Image baseImage)
         {
             BaseImage = Conversion.BitmapToMat(baseImage);
+        }
+
+
+
+        //Thresholding
+        private void CheckStoredValues()
+        {
+            if (LowerThreshold != null && UpperThreshold != null)
+                ThresholdValuesStored = true;
+            else
+                ThresholdValuesStored = false;
+
+            if (LowerVolume != null && UpperThreshold != null && BigContourVolume != null)
+                ContourVolumeStored = true;
+            else
+                ContourVolumeStored = false;
+        }
+        public void ChangeLowerThreshold(string lowerThreshold)
+        {
+            LowerThreshold = Convert.ToDouble(lowerThreshold);
+            CheckStoredValues();
+        }
+        public void ChangeUpperThreshold(string upperThreshold)
+        {
+            UpperThreshold = Convert.ToDouble(upperThreshold);
+            CheckStoredValues();
         }
         public void SetGreyScaleImage(Mat greyScaleImage)
         {
             GreyScaleImage = greyScaleImage;
         }
+
+
+
+        //volumes
         public void SetContoursVolumeRange(string lowerVolume, string upperVolume, string bigContourVolume)
         {
             LowerVolume = Convert.ToInt32(lowerVolume);
@@ -119,6 +144,23 @@ namespace VisionSystem.Models
             BigContourVolume = Convert.ToInt32(bigContourVolume);
             ContourVolumeStored = true;
         }
+        public void ChangeLowerVolume(string lowerVolume)
+        {
+            LowerVolume = Convert.ToDouble(lowerVolume);
+            CheckStoredValues();
+        }
+        public void ChangeUpperVolume(string upperVolume)
+        {
+            UpperVolume = Convert.ToDouble(upperVolume);
+            CheckStoredValues();
+        }
+        public void ChangeBigVolume(string bigContourVolume)
+        {
+            BigContourVolume = Convert.ToDouble(bigContourVolume);
+        }
+
+
+
 
         //events
     }

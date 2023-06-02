@@ -77,34 +77,60 @@ namespace VisionSystem.UIComponents
             ConsolesControl.ConsoleWriteLines("Calibration restarted");
         }
 
+
+        //Thresholding
+        private bool ValidateThresholdLowerTextBox()
+        {
+            double result = 0;
+            if (double.TryParse(lowerThresholdTextBox.Text, out result))
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool ValidateThresholdUpperTextBox()
+        {
+            double result = 0;
+            if (double.TryParse(upperThresholdTextBox.Text, out result))
+            {
+                return true;
+            }
+            return false;
+        }
+        private void lowerThresholdTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateThresholdLowerTextBox())
+            {
+                VisionController.ChangeLowerThreshold(lowerThresholdTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void upperThresholdTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateThresholdUpperTextBox())
+            {
+                VisionController.ChangeUpperThreshold(upperThresholdTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
         private void checkTresholdButton_Click(object sender, EventArgs e)
         {
-            if (ValidateThresholdTextBoxes() && VisionController.BaseImage != null)
+            if (VisionController.BaseImage != null)
             {
-                VisionController.SetThreshold(lowerThresholdTextBox.Text, upperThresholdTextBox.Text);
                 Image newImage = ImageOperations.ApplyGreyScale(VisionController);
                 LivePreview.Photo = newImage;
                 ConsolesControl.ConsoleWriteLines("Threshold applied");
             }
             else
             {
-                MessageBox.Show("Values are incorrect, try again");
+                MessageBox.Show("No Image found, take a photo or load sample image and try again !");
             }
         }
 
-        private bool ValidateThresholdTextBoxes()
-        {
-            double result = 0;
-            List<bool> states = new List<bool>();
-            states.Add(double.TryParse(lowerThresholdTextBox.Text, out result));
-            states.Add(double.TryParse(upperThresholdTextBox.Text, out result));
-            if (states.Contains(false))
-            {
-                return false;
-            }
-            return true;
-        }
 
+        //Finding objects
         private void findObjectsButton_Click(object sender, EventArgs e)
         {
             //TODO Validate Thresholding
@@ -112,7 +138,7 @@ namespace VisionSystem.UIComponents
             {
                 Image newImage = ImageOperations.FindContours(VisionController);
                 LivePreview.Photo = newImage;
-                ConsolesControl.ConsoleWriteLines("Threshold applied");
+                ConsolesControl.ConsoleWriteLines("Objects Found");
             }
             else
             {
@@ -120,6 +146,62 @@ namespace VisionSystem.UIComponents
             }
         }
 
+        //Volume textBoxes and Objects
+        private bool ValidateLowerVolumeTextBox()
+        {
+            double result = 0;
+            if (double.TryParse(lowerContourTextBox.Text, out result))
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool ValidateUpperVolumeTextBox()
+        {
+            double result = 0;
+            if (double.TryParse(upperContourTextbox.Text, out result))
+            {
+                return true;
+            }
+            return false;
+        }
+        private bool ValidateBigVolumeTextBox()
+        {
+            double result = 0;
+            if (double.TryParse(bigContoursTextbox.Text, out result))
+            {
+                return true;
+            }
+            return false;
+        }
+        private void lowerContourTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateLowerVolumeTextBox())
+            {
+                VisionController.ChangeLowerVolume(lowerContourTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+
+        }
+        private void upperContourTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateUpperVolumeTextBox())
+            {
+                VisionController.ChangeUpperVolume(upperContourTextbox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void bigContoursTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateBigVolumeTextBox())
+            {
+                VisionController.ChangeBigVolume(bigContoursTextbox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
         private void sortobjectsButton_Click(object sender, EventArgs e)
         {
             if (VisionController.contours != null)
@@ -133,5 +215,10 @@ namespace VisionSystem.UIComponents
                 MessageBox.Show("No contours stored, find contours first");
             }
         }
+
+
+
+
+
     }
 }

@@ -36,6 +36,7 @@ namespace _2DVisionSystem
             InitializeDropDowns();
             InitializeCameraMatrixGroupbox();
             InitializeCalibrationConsoles();
+            InitializeVisionSystemController();
             HomeTabConsoleWrite("Application Started");
         }
         //Main Form events
@@ -83,7 +84,10 @@ namespace _2DVisionSystem
         {
             calibrationMethodsBox.ConsolesControl = calibrationConsoles;
         }
-
+        private void InitializeVisionSystemController()
+        {
+            calibrationMethodsBox.VisionController = VisionSystemController;
+        }
 
 
         //Main Form Home Tab
@@ -252,7 +256,6 @@ namespace _2DVisionSystem
                 LivePreview = new LivePreviewForm();
                 LivePreview.Show();
                 calibrationMethodsBox.LivePreview = LivePreview;
-                calibrationMethodsBox.VisionController = VisionSystemController;
                 calibrationConsoles.ConsoleWriteLines("Live Preview Window opened");
             }
             else MessageBox.Show("Live Preview Window is already opened");

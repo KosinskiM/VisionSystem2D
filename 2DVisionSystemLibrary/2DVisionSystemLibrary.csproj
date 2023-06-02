@@ -93,12 +93,11 @@
     <Compile Include="ImageProcessing\ImageOperations.cs" />
     <Compile Include="Models\StoredObject.cs" />
     <Compile Include="Models\VisionSystemController.cs" />
-    <Compile Include="OldCode\CONNECT.cs" />
-    <Compile Include="OldCode\ContourOb.cs" />
-    <Compile Include="OldCode\VISION.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="OldCode\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

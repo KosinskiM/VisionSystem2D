@@ -30,12 +30,13 @@
         {
             System.Windows.Forms.TabControl calibrationtabControl;
             this.thresholdingPage = new System.Windows.Forms.TabPage();
+            this.dummyObjectsButton = new System.Windows.Forms.Button();
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.findObjectsButton = new System.Windows.Forms.Button();
             this.upperContourTextbox = new System.Windows.Forms.TextBox();
-            this.showObjectsButton = new System.Windows.Forms.Button();
+            this.sortObjectsButton = new System.Windows.Forms.Button();
             this.bigContoursTextbox = new System.Windows.Forms.TextBox();
             this.lowerContourLabel = new System.Windows.Forms.Label();
             this.bigContourLabel = new System.Windows.Forms.Label();
@@ -70,7 +71,6 @@
             this.redToLabel = new System.Windows.Forms.Label();
             this.greenFromTextBox = new System.Windows.Forms.TextBox();
             this.redToTwoLabel = new System.Windows.Forms.Label();
-            this.sortObjectsButton = new System.Windows.Forms.Button();
             calibrationtabControl = new System.Windows.Forms.TabControl();
             calibrationtabControl.SuspendLayout();
             this.thresholdingPage.SuspendLayout();
@@ -90,13 +90,13 @@
             // 
             // thresholdingPage
             // 
-            this.thresholdingPage.Controls.Add(this.sortObjectsButton);
+            this.thresholdingPage.Controls.Add(this.dummyObjectsButton);
             this.thresholdingPage.Controls.Add(this.button15);
             this.thresholdingPage.Controls.Add(this.button14);
             this.thresholdingPage.Controls.Add(this.button13);
             this.thresholdingPage.Controls.Add(this.findObjectsButton);
             this.thresholdingPage.Controls.Add(this.upperContourTextbox);
-            this.thresholdingPage.Controls.Add(this.showObjectsButton);
+            this.thresholdingPage.Controls.Add(this.sortObjectsButton);
             this.thresholdingPage.Controls.Add(this.bigContoursTextbox);
             this.thresholdingPage.Controls.Add(this.lowerContourLabel);
             this.thresholdingPage.Controls.Add(this.bigContourLabel);
@@ -114,6 +114,16 @@
             this.thresholdingPage.TabIndex = 0;
             this.thresholdingPage.Text = "Treshold";
             this.thresholdingPage.UseVisualStyleBackColor = true;
+            // 
+            // dummyObjectsButton
+            // 
+            this.dummyObjectsButton.Location = new System.Drawing.Point(89, 366);
+            this.dummyObjectsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.dummyObjectsButton.Name = "dummyObjectsButton";
+            this.dummyObjectsButton.Size = new System.Drawing.Size(225, 28);
+            this.dummyObjectsButton.TabIndex = 42;
+            this.dummyObjectsButton.Text = "Sort Objects";
+            this.dummyObjectsButton.UseVisualStyleBackColor = true;
             // 
             // button15
             // 
@@ -163,17 +173,18 @@
             this.upperContourTextbox.Name = "upperContourTextbox";
             this.upperContourTextbox.Size = new System.Drawing.Size(225, 20);
             this.upperContourTextbox.TabIndex = 35;
+            this.upperContourTextbox.TextChanged += new System.EventHandler(this.upperContourTextbox_TextChanged);
             // 
-            // showObjectsButton
+            // sortObjectsButton
             // 
-            this.showObjectsButton.Location = new System.Drawing.Point(89, 334);
-            this.showObjectsButton.Margin = new System.Windows.Forms.Padding(2);
-            this.showObjectsButton.Name = "showObjectsButton";
-            this.showObjectsButton.Size = new System.Drawing.Size(225, 28);
-            this.showObjectsButton.TabIndex = 32;
-            this.showObjectsButton.Text = "Show Objects";
-            this.showObjectsButton.UseVisualStyleBackColor = true;
-            this.showObjectsButton.Click += new System.EventHandler(this.sortobjectsButton_Click);
+            this.sortObjectsButton.Location = new System.Drawing.Point(89, 334);
+            this.sortObjectsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.sortObjectsButton.Name = "sortObjectsButton";
+            this.sortObjectsButton.Size = new System.Drawing.Size(225, 28);
+            this.sortObjectsButton.TabIndex = 32;
+            this.sortObjectsButton.Text = "Sort Objects";
+            this.sortObjectsButton.UseVisualStyleBackColor = true;
+            this.sortObjectsButton.Click += new System.EventHandler(this.sortobjectsButton_Click);
             // 
             // bigContoursTextbox
             // 
@@ -182,6 +193,7 @@
             this.bigContoursTextbox.Name = "bigContoursTextbox";
             this.bigContoursTextbox.Size = new System.Drawing.Size(225, 20);
             this.bigContoursTextbox.TabIndex = 37;
+            this.bigContoursTextbox.TextChanged += new System.EventHandler(this.bigContoursTextbox_TextChanged);
             // 
             // lowerContourLabel
             // 
@@ -210,6 +222,7 @@
             this.lowerContourTextBox.Name = "lowerContourTextBox";
             this.lowerContourTextBox.Size = new System.Drawing.Size(225, 20);
             this.lowerContourTextBox.TabIndex = 33;
+            this.lowerContourTextBox.TextChanged += new System.EventHandler(this.lowerContourTextBox_TextChanged);
             // 
             // upperContourLabel
             // 
@@ -239,6 +252,7 @@
             this.lowerThresholdTextBox.Name = "lowerThresholdTextBox";
             this.lowerThresholdTextBox.Size = new System.Drawing.Size(225, 20);
             this.lowerThresholdTextBox.TabIndex = 13;
+            this.lowerThresholdTextBox.TextChanged += new System.EventHandler(this.lowerThresholdTextBox_TextChanged);
             // 
             // lowerTreshholdLabel
             // 
@@ -257,6 +271,7 @@
             this.upperThresholdTextBox.Name = "upperThresholdTextBox";
             this.upperThresholdTextBox.Size = new System.Drawing.Size(225, 20);
             this.upperThresholdTextBox.TabIndex = 15;
+            this.upperThresholdTextBox.TextChanged += new System.EventHandler(this.upperThresholdTextBox_TextChanged);
             // 
             // upperTresholdLabel
             // 
@@ -295,7 +310,7 @@
             this.objectApperancePage.Controls.Add(this.redToTwoLabel);
             this.objectApperancePage.Location = new System.Drawing.Point(4, 22);
             this.objectApperancePage.Name = "objectApperancePage";
-            this.objectApperancePage.Size = new System.Drawing.Size(419, 496);
+            this.objectApperancePage.Size = new System.Drawing.Size(419, 522);
             this.objectApperancePage.TabIndex = 2;
             this.objectApperancePage.Text = "Objects Apperance";
             this.objectApperancePage.UseVisualStyleBackColor = true;
@@ -514,16 +529,6 @@
             this.redToTwoLabel.TabIndex = 25;
             this.redToTwoLabel.Text = "to (180)";
             // 
-            // sortObjectsButton
-            // 
-            this.sortObjectsButton.Location = new System.Drawing.Point(89, 366);
-            this.sortObjectsButton.Margin = new System.Windows.Forms.Padding(2);
-            this.sortObjectsButton.Name = "sortObjectsButton";
-            this.sortObjectsButton.Size = new System.Drawing.Size(225, 28);
-            this.sortObjectsButton.TabIndex = 42;
-            this.sortObjectsButton.Text = "Sort Objects";
-            this.sortObjectsButton.UseVisualStyleBackColor = true;
-            // 
             // CalibrationMethodsBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -545,7 +550,7 @@
         private System.Windows.Forms.TabPage thresholdingPage;
         private System.Windows.Forms.Button findObjectsButton;
         private System.Windows.Forms.TextBox upperContourTextbox;
-        private System.Windows.Forms.Button showObjectsButton;
+        private System.Windows.Forms.Button sortObjectsButton;
         private System.Windows.Forms.TextBox bigContoursTextbox;
         private System.Windows.Forms.Label lowerContourLabel;
         private System.Windows.Forms.Label bigContourLabel;
@@ -583,6 +588,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button sortObjectsButton;
+        private System.Windows.Forms.Button dummyObjectsButton;
     }
 }
