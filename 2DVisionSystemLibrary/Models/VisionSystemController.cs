@@ -69,24 +69,38 @@ namespace VisionSystem.Models
             private set;
         }
 
+
+        //Colors Range
+        public double? FromRed { get; private set; }
+        public double? ToRed { get; private set; }
+        public double? FromTwoRed { get; private set; }
+        public double? ToTwoRed { get; private set; }
+        public double? FromGreen { get; private set; }
+        public double? ToGreen { get; private set; }
+        public double? FromBlue { get; private set; }
+        public double? ToBLue { get; private set; }
+
         //Contours
         //All contours
-        public OpenCvSharp.Point[][] contours;
+        public OpenCvSharp.Point[][] Contours;
 
         //Sorted contours on volume
-        public OpenCvSharp.Point[][] smallContours;
-        public OpenCvSharp.Point[][] connectedContours;
+        public OpenCvSharp.Point[][] SmallContoursSorted;
+        public OpenCvSharp.Point[][] ConnectedContoursSorted;
 
 
 
 
 
 
-        public OpenCvSharp.Point[][] toolUpSingleContours;     //maska narzedzia gorna
-        public OpenCvSharp.Point[][] toolDownSingleContours;       //maska narzedzia dolna
+        public OpenCvSharp.Point[][] ToolUpSingleContours;     //maska narzedzia gorna
+        public OpenCvSharp.Point[][] ToolDownSingleContours;       //maska narzedzia dolna
 
 
 
+
+        //created and stored Element
+        public List<StoredElement> StoredSmallElement = new List<StoredElement>();
 
 
 
@@ -160,7 +174,11 @@ namespace VisionSystem.Models
         }
 
 
-
+        //Colors
+        public void ChangeFromRedRange(string fromRed)
+        {
+            FromRed = Convert.ToDouble(fromRed);
+        }
 
         //events
     }

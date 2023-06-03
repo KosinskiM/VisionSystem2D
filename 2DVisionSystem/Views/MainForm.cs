@@ -230,22 +230,12 @@ namespace _2DVisionSystem
         }
 
 
-
-
-
-
         /// ToolStripMenu
         private void introductionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form Introduction = new IntroductionForm();
             Introduction.Show();
         }
-
-
-
-
-
-
 
 
         //LivePreview Controls
@@ -260,7 +250,6 @@ namespace _2DVisionSystem
             }
             else MessageBox.Show("Live Preview Window is already opened");
         }
-
         private void startLivePreviewButton_Click(object sender, EventArgs e)
         {
             if (LivePreview != null)
@@ -270,7 +259,6 @@ namespace _2DVisionSystem
             }
             else MessageBox.Show("Please open Live Preview Window first");
         }
-
         private void stopLivePreviewButton_Click(object sender, EventArgs e)
         {
             if (LivePreview != null)
@@ -280,7 +268,6 @@ namespace _2DVisionSystem
             }
             else MessageBox.Show("Please open Live Preview Window first");
         }
-
         private void captureImageButton_Click(object sender, EventArgs e)
         {
             if (LivePreview != null)
@@ -292,7 +279,6 @@ namespace _2DVisionSystem
             }
             else MessageBox.Show("Please open Live Preview Window first");
         }
-
         private void loadSampleImg_Click(object sender, EventArgs e)
         {
             if (LivePreview != null)
@@ -305,24 +291,15 @@ namespace _2DVisionSystem
             }
             else MessageBox.Show("Please open Live Preview Window first");
         }
-
-
         private void defaultValuesButton_Click_1(object sender, EventArgs e)
         {
             calibrationMethodsBox.DefaultValues();
         }
-
         private void resetCalibrationButton_Click(object sender, EventArgs e)
         {
             calibrationMethodsBox.ResetCalibration();
         }
-
-        private void calibrationMethodsBox_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
+   
 
     }
 }

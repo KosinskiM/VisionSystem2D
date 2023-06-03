@@ -37,5 +37,23 @@ namespace VisionSystem.Views
             consoleTextBox.Text = content.ToString();
         }
 
+        public void ObjectsInfoWriteLines(string text)
+        {
+            StringBuilder content = new StringBuilder();
+            content.Append(objectsInformationTextBox.Text);
+            //messge = 1#   Live Preview Window opened
+            int lineCounter = 0;
+            for (int i = 0; i < content.Length; i++)
+            {
+                if (content[i] == '\n')
+                {
+                    lineCounter++;
+                }
+            }
+            content.AppendLine($"{ lineCounter }#   " + text);
+
+            objectsInformationTextBox.Text = content.ToString();
+        }
+
     }
 }

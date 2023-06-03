@@ -91,9 +91,10 @@
     <Compile Include="ImageProcessing\Conversion.cs" />
     <Compile Include="ImageProcessing\ImageAquisition.cs" />
     <Compile Include="ImageProcessing\ImageOperations.cs" />
-    <Compile Include="Models\StoredObject.cs" />
+    <Compile Include="Models\StoredElement.cs" />
     <Compile Include="Models\VisionSystemController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisionSystemLogic\StoredElementOperations.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="OldCode\" />

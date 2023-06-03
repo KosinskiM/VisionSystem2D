@@ -30,10 +30,6 @@
         {
             System.Windows.Forms.TabControl calibrationtabControl;
             this.thresholdingPage = new System.Windows.Forms.TabPage();
-            this.dummyObjectsButton = new System.Windows.Forms.Button();
-            this.button15 = new System.Windows.Forms.Button();
-            this.button14 = new System.Windows.Forms.Button();
-            this.button13 = new System.Windows.Forms.Button();
             this.findObjectsButton = new System.Windows.Forms.Button();
             this.upperContourTextbox = new System.Windows.Forms.TextBox();
             this.sortObjectsButton = new System.Windows.Forms.Button();
@@ -48,9 +44,9 @@
             this.upperThresholdTextBox = new System.Windows.Forms.TextBox();
             this.upperTresholdLabel = new System.Windows.Forms.Label();
             this.objectApperancePage = new System.Windows.Forms.TabPage();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.measureRealDimensionsButton = new System.Windows.Forms.Button();
+            this.shapeRecoqnitionButton = new System.Windows.Forms.Button();
+            this.angleRecognitionButton = new System.Windows.Forms.Button();
             this.blueColorLabel = new System.Windows.Forms.Label();
             this.redColorRangeLabel = new System.Windows.Forms.Label();
             this.greenColorLabel = new System.Windows.Forms.Label();
@@ -71,16 +67,22 @@
             this.redToLabel = new System.Windows.Forms.Label();
             this.greenFromTextBox = new System.Windows.Forms.TextBox();
             this.redToTwoLabel = new System.Windows.Forms.Label();
+            this.storeInfo = new System.Windows.Forms.TabPage();
+            this.button15 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
+            this.saveObjectsButton = new System.Windows.Forms.Button();
             calibrationtabControl = new System.Windows.Forms.TabControl();
             calibrationtabControl.SuspendLayout();
             this.thresholdingPage.SuspendLayout();
             this.objectApperancePage.SuspendLayout();
+            this.storeInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // calibrationtabControl
             // 
             calibrationtabControl.Controls.Add(this.thresholdingPage);
             calibrationtabControl.Controls.Add(this.objectApperancePage);
+            calibrationtabControl.Controls.Add(this.storeInfo);
             calibrationtabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             calibrationtabControl.Location = new System.Drawing.Point(0, 0);
             calibrationtabControl.Name = "calibrationtabControl";
@@ -90,10 +92,6 @@
             // 
             // thresholdingPage
             // 
-            this.thresholdingPage.Controls.Add(this.dummyObjectsButton);
-            this.thresholdingPage.Controls.Add(this.button15);
-            this.thresholdingPage.Controls.Add(this.button14);
-            this.thresholdingPage.Controls.Add(this.button13);
             this.thresholdingPage.Controls.Add(this.findObjectsButton);
             this.thresholdingPage.Controls.Add(this.upperContourTextbox);
             this.thresholdingPage.Controls.Add(this.sortObjectsButton);
@@ -115,49 +113,9 @@
             this.thresholdingPage.Text = "Treshold";
             this.thresholdingPage.UseVisualStyleBackColor = true;
             // 
-            // dummyObjectsButton
-            // 
-            this.dummyObjectsButton.Location = new System.Drawing.Point(89, 366);
-            this.dummyObjectsButton.Margin = new System.Windows.Forms.Padding(2);
-            this.dummyObjectsButton.Name = "dummyObjectsButton";
-            this.dummyObjectsButton.Size = new System.Drawing.Size(225, 28);
-            this.dummyObjectsButton.TabIndex = 42;
-            this.dummyObjectsButton.Text = "Sort Objects";
-            this.dummyObjectsButton.UseVisualStyleBackColor = true;
-            // 
-            // button15
-            // 
-            this.button15.Location = new System.Drawing.Point(91, 468);
-            this.button15.Margin = new System.Windows.Forms.Padding(2);
-            this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(225, 31);
-            this.button15.TabIndex = 41;
-            this.button15.Text = "Show Objects In Groups";
-            this.button15.UseVisualStyleBackColor = true;
-            // 
-            // button14
-            // 
-            this.button14.Location = new System.Drawing.Point(91, 433);
-            this.button14.Margin = new System.Windows.Forms.Padding(2);
-            this.button14.Name = "button14";
-            this.button14.Size = new System.Drawing.Size(225, 31);
-            this.button14.TabIndex = 40;
-            this.button14.Text = "Show Single Objects";
-            this.button14.UseVisualStyleBackColor = true;
-            // 
-            // button13
-            // 
-            this.button13.Location = new System.Drawing.Point(91, 398);
-            this.button13.Margin = new System.Windows.Forms.Padding(2);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(225, 31);
-            this.button13.TabIndex = 39;
-            this.button13.Text = "Save Objects";
-            this.button13.UseVisualStyleBackColor = true;
-            // 
             // findObjectsButton
             // 
-            this.findObjectsButton.Location = new System.Drawing.Point(89, 147);
+            this.findObjectsButton.Location = new System.Drawing.Point(90, 194);
             this.findObjectsButton.Margin = new System.Windows.Forms.Padding(2);
             this.findObjectsButton.Name = "findObjectsButton";
             this.findObjectsButton.Size = new System.Drawing.Size(225, 28);
@@ -168,7 +126,7 @@
             // 
             // upperContourTextbox
             // 
-            this.upperContourTextbox.Location = new System.Drawing.Point(89, 257);
+            this.upperContourTextbox.Location = new System.Drawing.Point(90, 304);
             this.upperContourTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.upperContourTextbox.Name = "upperContourTextbox";
             this.upperContourTextbox.Size = new System.Drawing.Size(225, 20);
@@ -177,7 +135,7 @@
             // 
             // sortObjectsButton
             // 
-            this.sortObjectsButton.Location = new System.Drawing.Point(89, 334);
+            this.sortObjectsButton.Location = new System.Drawing.Point(90, 381);
             this.sortObjectsButton.Margin = new System.Windows.Forms.Padding(2);
             this.sortObjectsButton.Name = "sortObjectsButton";
             this.sortObjectsButton.Size = new System.Drawing.Size(225, 28);
@@ -188,7 +146,7 @@
             // 
             // bigContoursTextbox
             // 
-            this.bigContoursTextbox.Location = new System.Drawing.Point(89, 299);
+            this.bigContoursTextbox.Location = new System.Drawing.Point(90, 346);
             this.bigContoursTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.bigContoursTextbox.Name = "bigContoursTextbox";
             this.bigContoursTextbox.Size = new System.Drawing.Size(225, 20);
@@ -198,7 +156,7 @@
             // lowerContourLabel
             // 
             this.lowerContourLabel.AutoSize = true;
-            this.lowerContourLabel.Location = new System.Drawing.Point(88, 201);
+            this.lowerContourLabel.Location = new System.Drawing.Point(89, 248);
             this.lowerContourLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lowerContourLabel.Name = "lowerContourLabel";
             this.lowerContourLabel.Size = new System.Drawing.Size(114, 13);
@@ -208,7 +166,7 @@
             // bigContourLabel
             // 
             this.bigContourLabel.AutoSize = true;
-            this.bigContourLabel.Location = new System.Drawing.Point(88, 284);
+            this.bigContourLabel.Location = new System.Drawing.Point(89, 331);
             this.bigContourLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.bigContourLabel.Name = "bigContourLabel";
             this.bigContourLabel.Size = new System.Drawing.Size(115, 13);
@@ -217,7 +175,7 @@
             // 
             // lowerContourTextBox
             // 
-            this.lowerContourTextBox.Location = new System.Drawing.Point(89, 216);
+            this.lowerContourTextBox.Location = new System.Drawing.Point(90, 263);
             this.lowerContourTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.lowerContourTextBox.Name = "lowerContourTextBox";
             this.lowerContourTextBox.Size = new System.Drawing.Size(225, 20);
@@ -227,7 +185,7 @@
             // upperContourLabel
             // 
             this.upperContourLabel.AutoSize = true;
-            this.upperContourLabel.Location = new System.Drawing.Point(88, 242);
+            this.upperContourLabel.Location = new System.Drawing.Point(89, 289);
             this.upperContourLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.upperContourLabel.Name = "upperContourLabel";
             this.upperContourLabel.Size = new System.Drawing.Size(114, 13);
@@ -236,7 +194,7 @@
             // 
             // checkTresholdButton
             // 
-            this.checkTresholdButton.Location = new System.Drawing.Point(89, 115);
+            this.checkTresholdButton.Location = new System.Drawing.Point(90, 162);
             this.checkTresholdButton.Margin = new System.Windows.Forms.Padding(2);
             this.checkTresholdButton.Name = "checkTresholdButton";
             this.checkTresholdButton.Size = new System.Drawing.Size(225, 28);
@@ -247,7 +205,7 @@
             // 
             // lowerThresholdTextBox
             // 
-            this.lowerThresholdTextBox.Location = new System.Drawing.Point(89, 31);
+            this.lowerThresholdTextBox.Location = new System.Drawing.Point(90, 78);
             this.lowerThresholdTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.lowerThresholdTextBox.Name = "lowerThresholdTextBox";
             this.lowerThresholdTextBox.Size = new System.Drawing.Size(225, 20);
@@ -257,7 +215,7 @@
             // lowerTreshholdLabel
             // 
             this.lowerTreshholdLabel.AutoSize = true;
-            this.lowerTreshholdLabel.Location = new System.Drawing.Point(88, 16);
+            this.lowerTreshholdLabel.Location = new System.Drawing.Point(89, 63);
             this.lowerTreshholdLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lowerTreshholdLabel.Name = "lowerTreshholdLabel";
             this.lowerTreshholdLabel.Size = new System.Drawing.Size(72, 13);
@@ -266,7 +224,7 @@
             // 
             // upperThresholdTextBox
             // 
-            this.upperThresholdTextBox.Location = new System.Drawing.Point(89, 80);
+            this.upperThresholdTextBox.Location = new System.Drawing.Point(90, 127);
             this.upperThresholdTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.upperThresholdTextBox.Name = "upperThresholdTextBox";
             this.upperThresholdTextBox.Size = new System.Drawing.Size(225, 20);
@@ -276,7 +234,7 @@
             // upperTresholdLabel
             // 
             this.upperTresholdLabel.AutoSize = true;
-            this.upperTresholdLabel.Location = new System.Drawing.Point(90, 65);
+            this.upperTresholdLabel.Location = new System.Drawing.Point(91, 112);
             this.upperTresholdLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.upperTresholdLabel.Name = "upperTresholdLabel";
             this.upperTresholdLabel.Size = new System.Drawing.Size(72, 13);
@@ -285,9 +243,9 @@
             // 
             // objectApperancePage
             // 
-            this.objectApperancePage.Controls.Add(this.button19);
-            this.objectApperancePage.Controls.Add(this.button10);
-            this.objectApperancePage.Controls.Add(this.button12);
+            this.objectApperancePage.Controls.Add(this.measureRealDimensionsButton);
+            this.objectApperancePage.Controls.Add(this.shapeRecoqnitionButton);
+            this.objectApperancePage.Controls.Add(this.angleRecognitionButton);
             this.objectApperancePage.Controls.Add(this.blueColorLabel);
             this.objectApperancePage.Controls.Add(this.redColorRangeLabel);
             this.objectApperancePage.Controls.Add(this.greenColorLabel);
@@ -315,40 +273,40 @@
             this.objectApperancePage.Text = "Objects Apperance";
             this.objectApperancePage.UseVisualStyleBackColor = true;
             // 
-            // button19
+            // measureRealDimensionsButton
             // 
-            this.button19.Location = new System.Drawing.Point(62, 319);
-            this.button19.Margin = new System.Windows.Forms.Padding(2);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(274, 28);
-            this.button19.TabIndex = 38;
-            this.button19.Text = "Measure Real Dimensions";
-            this.button19.UseVisualStyleBackColor = true;
+            this.measureRealDimensionsButton.Location = new System.Drawing.Point(62, 464);
+            this.measureRealDimensionsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.measureRealDimensionsButton.Name = "measureRealDimensionsButton";
+            this.measureRealDimensionsButton.Size = new System.Drawing.Size(274, 28);
+            this.measureRealDimensionsButton.TabIndex = 38;
+            this.measureRealDimensionsButton.Text = "Measure Real Dimensions";
+            this.measureRealDimensionsButton.UseVisualStyleBackColor = true;
             // 
-            // button10
+            // shapeRecoqnitionButton
             // 
-            this.button10.Location = new System.Drawing.Point(62, 214);
-            this.button10.Margin = new System.Windows.Forms.Padding(2);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(274, 25);
-            this.button10.TabIndex = 37;
-            this.button10.Text = "Shape Recognition";
-            this.button10.UseVisualStyleBackColor = true;
+            this.shapeRecoqnitionButton.Location = new System.Drawing.Point(62, 359);
+            this.shapeRecoqnitionButton.Margin = new System.Windows.Forms.Padding(2);
+            this.shapeRecoqnitionButton.Name = "shapeRecoqnitionButton";
+            this.shapeRecoqnitionButton.Size = new System.Drawing.Size(274, 25);
+            this.shapeRecoqnitionButton.TabIndex = 37;
+            this.shapeRecoqnitionButton.Text = "Shape Recognition";
+            this.shapeRecoqnitionButton.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // angleRecognitionButton
             // 
-            this.button12.Location = new System.Drawing.Point(62, 264);
-            this.button12.Margin = new System.Windows.Forms.Padding(2);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(274, 27);
-            this.button12.TabIndex = 36;
-            this.button12.Text = "Angle Recognition";
-            this.button12.UseVisualStyleBackColor = true;
+            this.angleRecognitionButton.Location = new System.Drawing.Point(62, 409);
+            this.angleRecognitionButton.Margin = new System.Windows.Forms.Padding(2);
+            this.angleRecognitionButton.Name = "angleRecognitionButton";
+            this.angleRecognitionButton.Size = new System.Drawing.Size(274, 27);
+            this.angleRecognitionButton.TabIndex = 36;
+            this.angleRecognitionButton.Text = "Angle Recognition";
+            this.angleRecognitionButton.UseVisualStyleBackColor = true;
             // 
             // blueColorLabel
             // 
             this.blueColorLabel.AutoSize = true;
-            this.blueColorLabel.Location = new System.Drawing.Point(11, 123);
+            this.blueColorLabel.Location = new System.Drawing.Point(35, 162);
             this.blueColorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.blueColorLabel.Name = "blueColorLabel";
             this.blueColorLabel.Size = new System.Drawing.Size(86, 13);
@@ -358,7 +316,7 @@
             // redColorRangeLabel
             // 
             this.redColorRangeLabel.AutoSize = true;
-            this.redColorRangeLabel.Location = new System.Drawing.Point(11, 34);
+            this.redColorRangeLabel.Location = new System.Drawing.Point(35, 48);
             this.redColorRangeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redColorRangeLabel.Name = "redColorRangeLabel";
             this.redColorRangeLabel.Size = new System.Drawing.Size(81, 13);
@@ -368,7 +326,7 @@
             // greenColorLabel
             // 
             this.greenColorLabel.AutoSize = true;
-            this.greenColorLabel.Location = new System.Drawing.Point(11, 78);
+            this.greenColorLabel.Location = new System.Drawing.Point(35, 105);
             this.greenColorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.greenColorLabel.Name = "greenColorLabel";
             this.greenColorLabel.Size = new System.Drawing.Size(93, 13);
@@ -377,18 +335,19 @@
             // 
             // checkcolorDetectionButton
             // 
-            this.checkcolorDetectionButton.Location = new System.Drawing.Point(62, 160);
+            this.checkcolorDetectionButton.Location = new System.Drawing.Point(62, 305);
             this.checkcolorDetectionButton.Margin = new System.Windows.Forms.Padding(2);
             this.checkcolorDetectionButton.Name = "checkcolorDetectionButton";
             this.checkcolorDetectionButton.Size = new System.Drawing.Size(274, 24);
             this.checkcolorDetectionButton.TabIndex = 0;
             this.checkcolorDetectionButton.Text = "Check Color Detection";
             this.checkcolorDetectionButton.UseVisualStyleBackColor = true;
+            this.checkcolorDetectionButton.Click += new System.EventHandler(this.checkcolorDetectionButton_Click);
             // 
             // blueToLabel
             // 
             this.blueToLabel.AutoSize = true;
-            this.blueToLabel.Location = new System.Drawing.Point(170, 108);
+            this.blueToLabel.Location = new System.Drawing.Point(194, 147);
             this.blueToLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.blueToLabel.Name = "blueToLabel";
             this.blueToLabel.Size = new System.Drawing.Size(43, 13);
@@ -397,16 +356,17 @@
             // 
             // redFromTextBox
             // 
-            this.redFromTextBox.Location = new System.Drawing.Point(110, 34);
+            this.redFromTextBox.Location = new System.Drawing.Point(134, 48);
             this.redFromTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.redFromTextBox.Name = "redFromTextBox";
             this.redFromTextBox.Size = new System.Drawing.Size(56, 20);
             this.redFromTextBox.TabIndex = 18;
+            this.redFromTextBox.TextChanged += new System.EventHandler(this.redFromTextBox_TextChanged);
             // 
             // blueFromLabel
             // 
             this.blueFromLabel.AutoSize = true;
-            this.blueFromLabel.Location = new System.Drawing.Point(108, 108);
+            this.blueFromLabel.Location = new System.Drawing.Point(132, 147);
             this.blueFromLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.blueFromLabel.Name = "blueFromLabel";
             this.blueFromLabel.Size = new System.Drawing.Size(54, 13);
@@ -415,48 +375,53 @@
             // 
             // redFromTwoTextBox
             // 
-            this.redFromTwoTextBox.Location = new System.Drawing.Point(231, 34);
+            this.redFromTwoTextBox.Location = new System.Drawing.Point(255, 48);
             this.redFromTwoTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.redFromTwoTextBox.Name = "redFromTwoTextBox";
             this.redFromTwoTextBox.Size = new System.Drawing.Size(58, 20);
             this.redFromTwoTextBox.TabIndex = 22;
+            this.redFromTwoTextBox.TextChanged += new System.EventHandler(this.redFromTwoTextBox_TextChanged);
             // 
             // blueToTextbox
             // 
-            this.blueToTextbox.Location = new System.Drawing.Point(170, 123);
+            this.blueToTextbox.Location = new System.Drawing.Point(194, 162);
             this.blueToTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.blueToTextbox.Name = "blueToTextbox";
             this.blueToTextbox.Size = new System.Drawing.Size(57, 20);
             this.blueToTextbox.TabIndex = 31;
+            this.blueToTextbox.TextChanged += new System.EventHandler(this.blueToTextbox_TextChanged);
             // 
             // redToTextBox
             // 
-            this.redToTextBox.Location = new System.Drawing.Point(170, 34);
+            this.redToTextBox.Location = new System.Drawing.Point(194, 48);
             this.redToTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.redToTextBox.Name = "redToTextBox";
             this.redToTextBox.Size = new System.Drawing.Size(57, 20);
             this.redToTextBox.TabIndex = 19;
+            this.redToTextBox.TextChanged += new System.EventHandler(this.redToTextBox_TextChanged);
             // 
             // blueFromTextBox
             // 
-            this.blueFromTextBox.Location = new System.Drawing.Point(110, 123);
+            this.blueFromTextBox.Location = new System.Drawing.Point(134, 162);
             this.blueFromTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.blueFromTextBox.Name = "blueFromTextBox";
             this.blueFromTextBox.Size = new System.Drawing.Size(56, 20);
             this.blueFromTextBox.TabIndex = 30;
+            this.blueFromTextBox.TextChanged += new System.EventHandler(this.blueFromTextBox_TextChanged);
             // 
             // redToTwoTextbox
             // 
-            this.redToTwoTextbox.Location = new System.Drawing.Point(293, 34);
+            this.redToTwoTextbox.Location = new System.Drawing.Point(317, 48);
             this.redToTwoTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.redToTwoTextbox.Name = "redToTwoTextbox";
             this.redToTwoTextbox.Size = new System.Drawing.Size(58, 20);
             this.redToTwoTextbox.TabIndex = 23;
+            this.redToTwoTextbox.TextChanged += new System.EventHandler(this.redToTwoTextbox_TextChanged);
             // 
             // greenToLabel
             // 
             this.greenToLabel.AutoSize = true;
-            this.greenToLabel.Location = new System.Drawing.Point(170, 63);
+            this.greenToLabel.Location = new System.Drawing.Point(194, 90);
             this.greenToLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.greenToLabel.Name = "greenToLabel";
             this.greenToLabel.Size = new System.Drawing.Size(37, 13);
@@ -466,7 +431,7 @@
             // redFromLabel
             // 
             this.redFromLabel.AutoSize = true;
-            this.redFromLabel.Location = new System.Drawing.Point(107, 19);
+            this.redFromLabel.Location = new System.Drawing.Point(131, 33);
             this.redFromLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redFromLabel.Name = "redFromLabel";
             this.redFromLabel.Size = new System.Drawing.Size(42, 13);
@@ -476,7 +441,7 @@
             // greenFromLabel
             // 
             this.greenFromLabel.AutoSize = true;
-            this.greenFromLabel.Location = new System.Drawing.Point(108, 63);
+            this.greenFromLabel.Location = new System.Drawing.Point(132, 90);
             this.greenFromLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.greenFromLabel.Name = "greenFromLabel";
             this.greenFromLabel.Size = new System.Drawing.Size(48, 13);
@@ -486,7 +451,7 @@
             // redFromTwoLabel
             // 
             this.redFromTwoLabel.AutoSize = true;
-            this.redFromTwoLabel.Location = new System.Drawing.Point(228, 19);
+            this.redFromTwoLabel.Location = new System.Drawing.Point(252, 33);
             this.redFromTwoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redFromTwoLabel.Name = "redFromTwoLabel";
             this.redFromTwoLabel.Size = new System.Drawing.Size(54, 13);
@@ -495,16 +460,17 @@
             // 
             // greenToTextbox
             // 
-            this.greenToTextbox.Location = new System.Drawing.Point(170, 78);
+            this.greenToTextbox.Location = new System.Drawing.Point(194, 105);
             this.greenToTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.greenToTextbox.Name = "greenToTextbox";
             this.greenToTextbox.Size = new System.Drawing.Size(57, 20);
             this.greenToTextbox.TabIndex = 27;
+            this.greenToTextbox.TextChanged += new System.EventHandler(this.greenToTextbox_TextChanged);
             // 
             // redToLabel
             // 
             this.redToLabel.AutoSize = true;
-            this.redToLabel.Location = new System.Drawing.Point(167, 19);
+            this.redToLabel.Location = new System.Drawing.Point(191, 33);
             this.redToLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redToLabel.Name = "redToLabel";
             this.redToLabel.Size = new System.Drawing.Size(37, 13);
@@ -513,21 +479,64 @@
             // 
             // greenFromTextBox
             // 
-            this.greenFromTextBox.Location = new System.Drawing.Point(110, 78);
+            this.greenFromTextBox.Location = new System.Drawing.Point(134, 105);
             this.greenFromTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.greenFromTextBox.Name = "greenFromTextBox";
             this.greenFromTextBox.Size = new System.Drawing.Size(56, 20);
             this.greenFromTextBox.TabIndex = 26;
+            this.greenFromTextBox.TextChanged += new System.EventHandler(this.greenFromTextBox_TextChanged);
             // 
             // redToTwoLabel
             // 
             this.redToTwoLabel.AutoSize = true;
-            this.redToTwoLabel.Location = new System.Drawing.Point(293, 19);
+            this.redToTwoLabel.Location = new System.Drawing.Point(317, 33);
             this.redToTwoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redToTwoLabel.Name = "redToTwoLabel";
             this.redToTwoLabel.Size = new System.Drawing.Size(43, 13);
             this.redToTwoLabel.TabIndex = 25;
             this.redToTwoLabel.Text = "to (180)";
+            // 
+            // storeInfo
+            // 
+            this.storeInfo.Controls.Add(this.button15);
+            this.storeInfo.Controls.Add(this.button14);
+            this.storeInfo.Controls.Add(this.saveObjectsButton);
+            this.storeInfo.Location = new System.Drawing.Point(4, 22);
+            this.storeInfo.Name = "storeInfo";
+            this.storeInfo.Size = new System.Drawing.Size(419, 522);
+            this.storeInfo.TabIndex = 3;
+            this.storeInfo.Text = "Store Info";
+            this.storeInfo.UseVisualStyleBackColor = true;
+            // 
+            // button15
+            // 
+            this.button15.Location = new System.Drawing.Point(83, 105);
+            this.button15.Margin = new System.Windows.Forms.Padding(2);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(225, 31);
+            this.button15.TabIndex = 44;
+            this.button15.Text = "Show Objects In Groups";
+            this.button15.UseVisualStyleBackColor = true;
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(83, 70);
+            this.button14.Margin = new System.Windows.Forms.Padding(2);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(225, 31);
+            this.button14.TabIndex = 43;
+            this.button14.Text = "Show Single Objects";
+            this.button14.UseVisualStyleBackColor = true;
+            // 
+            // saveObjectsButton
+            // 
+            this.saveObjectsButton.Location = new System.Drawing.Point(83, 35);
+            this.saveObjectsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.saveObjectsButton.Name = "saveObjectsButton";
+            this.saveObjectsButton.Size = new System.Drawing.Size(225, 31);
+            this.saveObjectsButton.TabIndex = 42;
+            this.saveObjectsButton.Text = "Save Objects";
+            this.saveObjectsButton.UseVisualStyleBackColor = true;
             // 
             // CalibrationMethodsBox
             // 
@@ -541,6 +550,7 @@
             this.thresholdingPage.PerformLayout();
             this.objectApperancePage.ResumeLayout(false);
             this.objectApperancePage.PerformLayout();
+            this.storeInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -582,12 +592,12 @@
         private System.Windows.Forms.Label redToLabel;
         private System.Windows.Forms.TextBox greenFromTextBox;
         private System.Windows.Forms.Label redToTwoLabel;
+        private System.Windows.Forms.Button shapeRecoqnitionButton;
+        private System.Windows.Forms.Button angleRecognitionButton;
+        private System.Windows.Forms.Button measureRealDimensionsButton;
+        private System.Windows.Forms.TabPage storeInfo;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button14;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Button button12;
-        private System.Windows.Forms.Button button19;
-        private System.Windows.Forms.Button dummyObjectsButton;
+        private System.Windows.Forms.Button saveObjectsButton;
     }
 }

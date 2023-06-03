@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using VisionSystem.Models;
 using VisionSystem.Views;
 using VisionSystemLibrary.ImageProcessing;
+using VisionSystemLibrary.VisionSystemLogic;
 
 namespace VisionSystem.UIComponents
 {
@@ -28,6 +29,18 @@ namespace VisionSystem.UIComponents
         public CalibrationMethodsBox()
         {
             InitializeComponent();
+        }
+
+        //input textbox data validation
+
+        private bool ValidateInputNumber(string input)
+        {
+            double result = 0;
+            if (double.TryParse(input, out result))
+            {
+                return true;
+            }
+            return false;
         }
 
         public void DefaultValues()
@@ -79,27 +92,9 @@ namespace VisionSystem.UIComponents
 
 
         //Thresholding
-        private bool ValidateThresholdLowerTextBox()
-        {
-            double result = 0;
-            if (double.TryParse(lowerThresholdTextBox.Text, out result))
-            {
-                return true;
-            }
-            return false;
-        }
-        private bool ValidateThresholdUpperTextBox()
-        {
-            double result = 0;
-            if (double.TryParse(upperThresholdTextBox.Text, out result))
-            {
-                return true;
-            }
-            return false;
-        }
         private void lowerThresholdTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ValidateThresholdLowerTextBox())
+            if (ValidateInputNumber(lowerThresholdTextBox.Text))
             {
                 VisionController.ChangeLowerThreshold(lowerThresholdTextBox.Text);
             }
@@ -108,7 +103,7 @@ namespace VisionSystem.UIComponents
         }
         private void upperThresholdTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ValidateThresholdUpperTextBox())
+            if (ValidateInputNumber(upperThresholdTextBox.Text))
             {
                 VisionController.ChangeUpperThreshold(upperThresholdTextBox.Text);
             }
@@ -146,37 +141,10 @@ namespace VisionSystem.UIComponents
             }
         }
 
-        //Volume textBoxes and Objects
-        private bool ValidateLowerVolumeTextBox()
-        {
-            double result = 0;
-            if (double.TryParse(lowerContourTextBox.Text, out result))
-            {
-                return true;
-            }
-            return false;
-        }
-        private bool ValidateUpperVolumeTextBox()
-        {
-            double result = 0;
-            if (double.TryParse(upperContourTextbox.Text, out result))
-            {
-                return true;
-            }
-            return false;
-        }
-        private bool ValidateBigVolumeTextBox()
-        {
-            double result = 0;
-            if (double.TryParse(bigContoursTextbox.Text, out result))
-            {
-                return true;
-            }
-            return false;
-        }
+        //Volume textBoxes and Objects 
         private void lowerContourTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (ValidateLowerVolumeTextBox())
+            if (ValidateInputNumber(lowerContourTextBox.Text))
             {
                 VisionController.ChangeLowerVolume(lowerContourTextBox.Text);
             }
@@ -186,7 +154,7 @@ namespace VisionSystem.UIComponents
         }
         private void upperContourTextbox_TextChanged(object sender, EventArgs e)
         {
-            if (ValidateUpperVolumeTextBox())
+            if (ValidateInputNumber(upperContourTextbox.Text))
             {
                 VisionController.ChangeUpperVolume(upperContourTextbox.Text);
             }
@@ -195,7 +163,7 @@ namespace VisionSystem.UIComponents
         }
         private void bigContoursTextbox_TextChanged(object sender, EventArgs e)
         {
-            if (ValidateBigVolumeTextBox())
+            if (ValidateInputNumber(bigContoursTextbox.Text))
             {
                 VisionController.ChangeBigVolume(bigContoursTextbox.Text);
             }
@@ -204,7 +172,7 @@ namespace VisionSystem.UIComponents
         }
         private void sortobjectsButton_Click(object sender, EventArgs e)
         {
-            if (VisionController.contours != null)
+            if (VisionController.Contours != null)
             {
                 Image newImage = ImageOperations.SortContoursOnVolume(VisionController);
                 LivePreview.Photo = newImage;
@@ -216,9 +184,98 @@ namespace VisionSystem.UIComponents
             }
         }
 
+        private void saveObjectsButton_Click(object sender, EventArgs e)
+        {
+            if (VisionController.SmallContoursSorted != null || VisionController.ConnectedContoursSorted != null)
+            {
+                StoredElementOperations.CreateStoredElements(VisionController);
+            }
+            else
+            {
+                MessageBox.Show("No contours stored, find contours first");
+            }
+        }
 
 
+        //colors 
+        private void redFromTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(redFromTextBox.Text))
+            {
+                VisionController.ChangeFromRedRange(redFromTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void redToTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(redToTextBox.Text))
+            {
+                VisionController.ChangeFromRedRange(redToTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void redFromTwoTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(redFromTwoTextBox.Text))
+            {
+                VisionController.ChangeFromRedRange(redFromTwoTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void redToTwoTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(redToTwoTextbox.Text))
+            {
+                VisionController.ChangeFromRedRange(redToTwoTextbox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void greenFromTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(greenFromTextBox.Text))
+            {
+                VisionController.ChangeFromRedRange(greenFromTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void greenToTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(greenToTextbox.Text))
+            {
+                VisionController.ChangeFromRedRange(greenToTextbox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void blueFromTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(blueFromTextBox.Text))
+            {
+                VisionController.ChangeFromRedRange(blueFromTextBox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
+        private void blueToTextbox_TextChanged(object sender, EventArgs e)
+        {
+            if (ValidateInputNumber(blueToTextbox.Text))
+            {
+                VisionController.ChangeFromRedRange(blueToTextbox.Text);
+            }
+            else
+                MessageBox.Show("Please insert a valid number and try again !");
+        }
 
+        private void checkcolorDetectionButton_Click(object sender, EventArgs e)
+        {
+            //validate values if good
+            //pass range values
+        }
 
     }
 }
