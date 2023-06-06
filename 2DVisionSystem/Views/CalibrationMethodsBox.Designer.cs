@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.TabControl calibrationtabControl;
-            this.thresholdingPage = new System.Windows.Forms.TabPage();
+            this.thresholdingTab = new System.Windows.Forms.TabPage();
             this.findObjectsButton = new System.Windows.Forms.Button();
             this.upperContourTextbox = new System.Windows.Forms.TextBox();
             this.sortObjectsButton = new System.Windows.Forms.Button();
@@ -43,8 +43,7 @@
             this.lowerTreshholdLabel = new System.Windows.Forms.Label();
             this.upperThresholdTextBox = new System.Windows.Forms.TextBox();
             this.upperTresholdLabel = new System.Windows.Forms.Label();
-            this.objectApperancePage = new System.Windows.Forms.TabPage();
-            this.measureRealDimensionsButton = new System.Windows.Forms.Button();
+            this.objectApperanceTab = new System.Windows.Forms.TabPage();
             this.shapeRecoqnitionButton = new System.Windows.Forms.Button();
             this.angleRecognitionButton = new System.Windows.Forms.Button();
             this.blueColorLabel = new System.Windows.Forms.Label();
@@ -67,22 +66,27 @@
             this.redToLabel = new System.Windows.Forms.Label();
             this.greenFromTextBox = new System.Windows.Forms.TextBox();
             this.redToTwoLabel = new System.Windows.Forms.Label();
-            this.storeInfo = new System.Windows.Forms.TabPage();
+            this.storeInfoTab = new System.Windows.Forms.TabPage();
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.saveObjectsButton = new System.Windows.Forms.Button();
+            this.realDimensionsTab = new System.Windows.Forms.TabPage();
+            this.measureReferenceObjectsButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             calibrationtabControl = new System.Windows.Forms.TabControl();
             calibrationtabControl.SuspendLayout();
-            this.thresholdingPage.SuspendLayout();
-            this.objectApperancePage.SuspendLayout();
-            this.storeInfo.SuspendLayout();
+            this.thresholdingTab.SuspendLayout();
+            this.objectApperanceTab.SuspendLayout();
+            this.storeInfoTab.SuspendLayout();
+            this.realDimensionsTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // calibrationtabControl
             // 
-            calibrationtabControl.Controls.Add(this.thresholdingPage);
-            calibrationtabControl.Controls.Add(this.objectApperancePage);
-            calibrationtabControl.Controls.Add(this.storeInfo);
+            calibrationtabControl.Controls.Add(this.thresholdingTab);
+            calibrationtabControl.Controls.Add(this.objectApperanceTab);
+            calibrationtabControl.Controls.Add(this.realDimensionsTab);
+            calibrationtabControl.Controls.Add(this.storeInfoTab);
             calibrationtabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             calibrationtabControl.Location = new System.Drawing.Point(0, 0);
             calibrationtabControl.Name = "calibrationtabControl";
@@ -90,28 +94,28 @@
             calibrationtabControl.Size = new System.Drawing.Size(427, 548);
             calibrationtabControl.TabIndex = 41;
             // 
-            // thresholdingPage
+            // thresholdingTab
             // 
-            this.thresholdingPage.Controls.Add(this.findObjectsButton);
-            this.thresholdingPage.Controls.Add(this.upperContourTextbox);
-            this.thresholdingPage.Controls.Add(this.sortObjectsButton);
-            this.thresholdingPage.Controls.Add(this.bigContoursTextbox);
-            this.thresholdingPage.Controls.Add(this.lowerContourLabel);
-            this.thresholdingPage.Controls.Add(this.bigContourLabel);
-            this.thresholdingPage.Controls.Add(this.lowerContourTextBox);
-            this.thresholdingPage.Controls.Add(this.upperContourLabel);
-            this.thresholdingPage.Controls.Add(this.checkTresholdButton);
-            this.thresholdingPage.Controls.Add(this.lowerThresholdTextBox);
-            this.thresholdingPage.Controls.Add(this.lowerTreshholdLabel);
-            this.thresholdingPage.Controls.Add(this.upperThresholdTextBox);
-            this.thresholdingPage.Controls.Add(this.upperTresholdLabel);
-            this.thresholdingPage.Location = new System.Drawing.Point(4, 22);
-            this.thresholdingPage.Name = "thresholdingPage";
-            this.thresholdingPage.Padding = new System.Windows.Forms.Padding(3);
-            this.thresholdingPage.Size = new System.Drawing.Size(419, 522);
-            this.thresholdingPage.TabIndex = 0;
-            this.thresholdingPage.Text = "Treshold";
-            this.thresholdingPage.UseVisualStyleBackColor = true;
+            this.thresholdingTab.Controls.Add(this.findObjectsButton);
+            this.thresholdingTab.Controls.Add(this.upperContourTextbox);
+            this.thresholdingTab.Controls.Add(this.sortObjectsButton);
+            this.thresholdingTab.Controls.Add(this.bigContoursTextbox);
+            this.thresholdingTab.Controls.Add(this.lowerContourLabel);
+            this.thresholdingTab.Controls.Add(this.bigContourLabel);
+            this.thresholdingTab.Controls.Add(this.lowerContourTextBox);
+            this.thresholdingTab.Controls.Add(this.upperContourLabel);
+            this.thresholdingTab.Controls.Add(this.checkTresholdButton);
+            this.thresholdingTab.Controls.Add(this.lowerThresholdTextBox);
+            this.thresholdingTab.Controls.Add(this.lowerTreshholdLabel);
+            this.thresholdingTab.Controls.Add(this.upperThresholdTextBox);
+            this.thresholdingTab.Controls.Add(this.upperTresholdLabel);
+            this.thresholdingTab.Location = new System.Drawing.Point(4, 22);
+            this.thresholdingTab.Name = "thresholdingTab";
+            this.thresholdingTab.Padding = new System.Windows.Forms.Padding(3);
+            this.thresholdingTab.Size = new System.Drawing.Size(419, 522);
+            this.thresholdingTab.TabIndex = 0;
+            this.thresholdingTab.Text = "Treshold";
+            this.thresholdingTab.UseVisualStyleBackColor = true;
             // 
             // findObjectsButton
             // 
@@ -241,72 +245,63 @@
             this.upperTresholdLabel.TabIndex = 16;
             this.upperTresholdLabel.Text = "Upper Thresh";
             // 
-            // objectApperancePage
+            // objectApperanceTab
             // 
-            this.objectApperancePage.Controls.Add(this.measureRealDimensionsButton);
-            this.objectApperancePage.Controls.Add(this.shapeRecoqnitionButton);
-            this.objectApperancePage.Controls.Add(this.angleRecognitionButton);
-            this.objectApperancePage.Controls.Add(this.blueColorLabel);
-            this.objectApperancePage.Controls.Add(this.redColorRangeLabel);
-            this.objectApperancePage.Controls.Add(this.greenColorLabel);
-            this.objectApperancePage.Controls.Add(this.checkcolorDetectionButton);
-            this.objectApperancePage.Controls.Add(this.blueToLabel);
-            this.objectApperancePage.Controls.Add(this.redFromTextBox);
-            this.objectApperancePage.Controls.Add(this.blueFromLabel);
-            this.objectApperancePage.Controls.Add(this.redFromTwoTextBox);
-            this.objectApperancePage.Controls.Add(this.blueToTextbox);
-            this.objectApperancePage.Controls.Add(this.redToTextBox);
-            this.objectApperancePage.Controls.Add(this.blueFromTextBox);
-            this.objectApperancePage.Controls.Add(this.redToTwoTextbox);
-            this.objectApperancePage.Controls.Add(this.greenToLabel);
-            this.objectApperancePage.Controls.Add(this.redFromLabel);
-            this.objectApperancePage.Controls.Add(this.greenFromLabel);
-            this.objectApperancePage.Controls.Add(this.redFromTwoLabel);
-            this.objectApperancePage.Controls.Add(this.greenToTextbox);
-            this.objectApperancePage.Controls.Add(this.redToLabel);
-            this.objectApperancePage.Controls.Add(this.greenFromTextBox);
-            this.objectApperancePage.Controls.Add(this.redToTwoLabel);
-            this.objectApperancePage.Location = new System.Drawing.Point(4, 22);
-            this.objectApperancePage.Name = "objectApperancePage";
-            this.objectApperancePage.Size = new System.Drawing.Size(419, 522);
-            this.objectApperancePage.TabIndex = 2;
-            this.objectApperancePage.Text = "Objects Apperance";
-            this.objectApperancePage.UseVisualStyleBackColor = true;
-            // 
-            // measureRealDimensionsButton
-            // 
-            this.measureRealDimensionsButton.Location = new System.Drawing.Point(62, 464);
-            this.measureRealDimensionsButton.Margin = new System.Windows.Forms.Padding(2);
-            this.measureRealDimensionsButton.Name = "measureRealDimensionsButton";
-            this.measureRealDimensionsButton.Size = new System.Drawing.Size(274, 28);
-            this.measureRealDimensionsButton.TabIndex = 38;
-            this.measureRealDimensionsButton.Text = "Measure Real Dimensions";
-            this.measureRealDimensionsButton.UseVisualStyleBackColor = true;
+            this.objectApperanceTab.Controls.Add(this.shapeRecoqnitionButton);
+            this.objectApperanceTab.Controls.Add(this.angleRecognitionButton);
+            this.objectApperanceTab.Controls.Add(this.blueColorLabel);
+            this.objectApperanceTab.Controls.Add(this.redColorRangeLabel);
+            this.objectApperanceTab.Controls.Add(this.greenColorLabel);
+            this.objectApperanceTab.Controls.Add(this.checkcolorDetectionButton);
+            this.objectApperanceTab.Controls.Add(this.blueToLabel);
+            this.objectApperanceTab.Controls.Add(this.redFromTextBox);
+            this.objectApperanceTab.Controls.Add(this.blueFromLabel);
+            this.objectApperanceTab.Controls.Add(this.redFromTwoTextBox);
+            this.objectApperanceTab.Controls.Add(this.blueToTextbox);
+            this.objectApperanceTab.Controls.Add(this.redToTextBox);
+            this.objectApperanceTab.Controls.Add(this.blueFromTextBox);
+            this.objectApperanceTab.Controls.Add(this.redToTwoTextbox);
+            this.objectApperanceTab.Controls.Add(this.greenToLabel);
+            this.objectApperanceTab.Controls.Add(this.redFromLabel);
+            this.objectApperanceTab.Controls.Add(this.greenFromLabel);
+            this.objectApperanceTab.Controls.Add(this.redFromTwoLabel);
+            this.objectApperanceTab.Controls.Add(this.greenToTextbox);
+            this.objectApperanceTab.Controls.Add(this.redToLabel);
+            this.objectApperanceTab.Controls.Add(this.greenFromTextBox);
+            this.objectApperanceTab.Controls.Add(this.redToTwoLabel);
+            this.objectApperanceTab.Location = new System.Drawing.Point(4, 22);
+            this.objectApperanceTab.Name = "objectApperanceTab";
+            this.objectApperanceTab.Size = new System.Drawing.Size(419, 522);
+            this.objectApperanceTab.TabIndex = 2;
+            this.objectApperanceTab.Text = "Objects Apperance";
+            this.objectApperanceTab.UseVisualStyleBackColor = true;
             // 
             // shapeRecoqnitionButton
             // 
-            this.shapeRecoqnitionButton.Location = new System.Drawing.Point(62, 359);
+            this.shapeRecoqnitionButton.Location = new System.Drawing.Point(62, 337);
             this.shapeRecoqnitionButton.Margin = new System.Windows.Forms.Padding(2);
             this.shapeRecoqnitionButton.Name = "shapeRecoqnitionButton";
             this.shapeRecoqnitionButton.Size = new System.Drawing.Size(274, 25);
             this.shapeRecoqnitionButton.TabIndex = 37;
             this.shapeRecoqnitionButton.Text = "Shape Recognition";
             this.shapeRecoqnitionButton.UseVisualStyleBackColor = true;
+            this.shapeRecoqnitionButton.Click += new System.EventHandler(this.shapeRecoqnitionButton_Click);
             // 
             // angleRecognitionButton
             // 
-            this.angleRecognitionButton.Location = new System.Drawing.Point(62, 409);
+            this.angleRecognitionButton.Location = new System.Drawing.Point(62, 387);
             this.angleRecognitionButton.Margin = new System.Windows.Forms.Padding(2);
             this.angleRecognitionButton.Name = "angleRecognitionButton";
             this.angleRecognitionButton.Size = new System.Drawing.Size(274, 27);
             this.angleRecognitionButton.TabIndex = 36;
             this.angleRecognitionButton.Text = "Angle Recognition";
             this.angleRecognitionButton.UseVisualStyleBackColor = true;
+            this.angleRecognitionButton.Click += new System.EventHandler(this.angleRecognitionButton_Click);
             // 
             // blueColorLabel
             // 
             this.blueColorLabel.AutoSize = true;
-            this.blueColorLabel.Location = new System.Drawing.Point(35, 162);
+            this.blueColorLabel.Location = new System.Drawing.Point(30, 212);
             this.blueColorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.blueColorLabel.Name = "blueColorLabel";
             this.blueColorLabel.Size = new System.Drawing.Size(86, 13);
@@ -316,7 +311,7 @@
             // redColorRangeLabel
             // 
             this.redColorRangeLabel.AutoSize = true;
-            this.redColorRangeLabel.Location = new System.Drawing.Point(35, 48);
+            this.redColorRangeLabel.Location = new System.Drawing.Point(30, 98);
             this.redColorRangeLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redColorRangeLabel.Name = "redColorRangeLabel";
             this.redColorRangeLabel.Size = new System.Drawing.Size(81, 13);
@@ -326,7 +321,7 @@
             // greenColorLabel
             // 
             this.greenColorLabel.AutoSize = true;
-            this.greenColorLabel.Location = new System.Drawing.Point(35, 105);
+            this.greenColorLabel.Location = new System.Drawing.Point(30, 155);
             this.greenColorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.greenColorLabel.Name = "greenColorLabel";
             this.greenColorLabel.Size = new System.Drawing.Size(93, 13);
@@ -335,7 +330,7 @@
             // 
             // checkcolorDetectionButton
             // 
-            this.checkcolorDetectionButton.Location = new System.Drawing.Point(62, 305);
+            this.checkcolorDetectionButton.Location = new System.Drawing.Point(62, 283);
             this.checkcolorDetectionButton.Margin = new System.Windows.Forms.Padding(2);
             this.checkcolorDetectionButton.Name = "checkcolorDetectionButton";
             this.checkcolorDetectionButton.Size = new System.Drawing.Size(274, 24);
@@ -347,7 +342,7 @@
             // blueToLabel
             // 
             this.blueToLabel.AutoSize = true;
-            this.blueToLabel.Location = new System.Drawing.Point(194, 147);
+            this.blueToLabel.Location = new System.Drawing.Point(189, 197);
             this.blueToLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.blueToLabel.Name = "blueToLabel";
             this.blueToLabel.Size = new System.Drawing.Size(43, 13);
@@ -356,7 +351,7 @@
             // 
             // redFromTextBox
             // 
-            this.redFromTextBox.Location = new System.Drawing.Point(134, 48);
+            this.redFromTextBox.Location = new System.Drawing.Point(129, 98);
             this.redFromTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.redFromTextBox.Name = "redFromTextBox";
             this.redFromTextBox.Size = new System.Drawing.Size(56, 20);
@@ -366,7 +361,7 @@
             // blueFromLabel
             // 
             this.blueFromLabel.AutoSize = true;
-            this.blueFromLabel.Location = new System.Drawing.Point(132, 147);
+            this.blueFromLabel.Location = new System.Drawing.Point(127, 197);
             this.blueFromLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.blueFromLabel.Name = "blueFromLabel";
             this.blueFromLabel.Size = new System.Drawing.Size(54, 13);
@@ -375,7 +370,7 @@
             // 
             // redFromTwoTextBox
             // 
-            this.redFromTwoTextBox.Location = new System.Drawing.Point(255, 48);
+            this.redFromTwoTextBox.Location = new System.Drawing.Point(250, 98);
             this.redFromTwoTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.redFromTwoTextBox.Name = "redFromTwoTextBox";
             this.redFromTwoTextBox.Size = new System.Drawing.Size(58, 20);
@@ -384,7 +379,7 @@
             // 
             // blueToTextbox
             // 
-            this.blueToTextbox.Location = new System.Drawing.Point(194, 162);
+            this.blueToTextbox.Location = new System.Drawing.Point(189, 212);
             this.blueToTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.blueToTextbox.Name = "blueToTextbox";
             this.blueToTextbox.Size = new System.Drawing.Size(57, 20);
@@ -393,7 +388,7 @@
             // 
             // redToTextBox
             // 
-            this.redToTextBox.Location = new System.Drawing.Point(194, 48);
+            this.redToTextBox.Location = new System.Drawing.Point(189, 98);
             this.redToTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.redToTextBox.Name = "redToTextBox";
             this.redToTextBox.Size = new System.Drawing.Size(57, 20);
@@ -402,7 +397,7 @@
             // 
             // blueFromTextBox
             // 
-            this.blueFromTextBox.Location = new System.Drawing.Point(134, 162);
+            this.blueFromTextBox.Location = new System.Drawing.Point(129, 212);
             this.blueFromTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.blueFromTextBox.Name = "blueFromTextBox";
             this.blueFromTextBox.Size = new System.Drawing.Size(56, 20);
@@ -411,7 +406,7 @@
             // 
             // redToTwoTextbox
             // 
-            this.redToTwoTextbox.Location = new System.Drawing.Point(317, 48);
+            this.redToTwoTextbox.Location = new System.Drawing.Point(312, 98);
             this.redToTwoTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.redToTwoTextbox.Name = "redToTwoTextbox";
             this.redToTwoTextbox.Size = new System.Drawing.Size(58, 20);
@@ -421,7 +416,7 @@
             // greenToLabel
             // 
             this.greenToLabel.AutoSize = true;
-            this.greenToLabel.Location = new System.Drawing.Point(194, 90);
+            this.greenToLabel.Location = new System.Drawing.Point(189, 140);
             this.greenToLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.greenToLabel.Name = "greenToLabel";
             this.greenToLabel.Size = new System.Drawing.Size(37, 13);
@@ -431,7 +426,7 @@
             // redFromLabel
             // 
             this.redFromLabel.AutoSize = true;
-            this.redFromLabel.Location = new System.Drawing.Point(131, 33);
+            this.redFromLabel.Location = new System.Drawing.Point(126, 83);
             this.redFromLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redFromLabel.Name = "redFromLabel";
             this.redFromLabel.Size = new System.Drawing.Size(42, 13);
@@ -441,7 +436,7 @@
             // greenFromLabel
             // 
             this.greenFromLabel.AutoSize = true;
-            this.greenFromLabel.Location = new System.Drawing.Point(132, 90);
+            this.greenFromLabel.Location = new System.Drawing.Point(127, 140);
             this.greenFromLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.greenFromLabel.Name = "greenFromLabel";
             this.greenFromLabel.Size = new System.Drawing.Size(48, 13);
@@ -451,7 +446,7 @@
             // redFromTwoLabel
             // 
             this.redFromTwoLabel.AutoSize = true;
-            this.redFromTwoLabel.Location = new System.Drawing.Point(252, 33);
+            this.redFromTwoLabel.Location = new System.Drawing.Point(247, 83);
             this.redFromTwoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redFromTwoLabel.Name = "redFromTwoLabel";
             this.redFromTwoLabel.Size = new System.Drawing.Size(54, 13);
@@ -460,7 +455,7 @@
             // 
             // greenToTextbox
             // 
-            this.greenToTextbox.Location = new System.Drawing.Point(194, 105);
+            this.greenToTextbox.Location = new System.Drawing.Point(189, 155);
             this.greenToTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.greenToTextbox.Name = "greenToTextbox";
             this.greenToTextbox.Size = new System.Drawing.Size(57, 20);
@@ -470,7 +465,7 @@
             // redToLabel
             // 
             this.redToLabel.AutoSize = true;
-            this.redToLabel.Location = new System.Drawing.Point(191, 33);
+            this.redToLabel.Location = new System.Drawing.Point(186, 83);
             this.redToLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redToLabel.Name = "redToLabel";
             this.redToLabel.Size = new System.Drawing.Size(37, 13);
@@ -479,7 +474,7 @@
             // 
             // greenFromTextBox
             // 
-            this.greenFromTextBox.Location = new System.Drawing.Point(134, 105);
+            this.greenFromTextBox.Location = new System.Drawing.Point(129, 155);
             this.greenFromTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.greenFromTextBox.Name = "greenFromTextBox";
             this.greenFromTextBox.Size = new System.Drawing.Size(56, 20);
@@ -489,24 +484,24 @@
             // redToTwoLabel
             // 
             this.redToTwoLabel.AutoSize = true;
-            this.redToTwoLabel.Location = new System.Drawing.Point(317, 33);
+            this.redToTwoLabel.Location = new System.Drawing.Point(312, 83);
             this.redToTwoLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.redToTwoLabel.Name = "redToTwoLabel";
             this.redToTwoLabel.Size = new System.Drawing.Size(43, 13);
             this.redToTwoLabel.TabIndex = 25;
             this.redToTwoLabel.Text = "to (180)";
             // 
-            // storeInfo
+            // storeInfoTab
             // 
-            this.storeInfo.Controls.Add(this.button15);
-            this.storeInfo.Controls.Add(this.button14);
-            this.storeInfo.Controls.Add(this.saveObjectsButton);
-            this.storeInfo.Location = new System.Drawing.Point(4, 22);
-            this.storeInfo.Name = "storeInfo";
-            this.storeInfo.Size = new System.Drawing.Size(419, 522);
-            this.storeInfo.TabIndex = 3;
-            this.storeInfo.Text = "Store Info";
-            this.storeInfo.UseVisualStyleBackColor = true;
+            this.storeInfoTab.Controls.Add(this.button15);
+            this.storeInfoTab.Controls.Add(this.button14);
+            this.storeInfoTab.Controls.Add(this.saveObjectsButton);
+            this.storeInfoTab.Location = new System.Drawing.Point(4, 22);
+            this.storeInfoTab.Name = "storeInfoTab";
+            this.storeInfoTab.Size = new System.Drawing.Size(419, 522);
+            this.storeInfoTab.TabIndex = 3;
+            this.storeInfoTab.Text = "Store Info";
+            this.storeInfoTab.UseVisualStyleBackColor = true;
             // 
             // button15
             // 
@@ -537,6 +532,39 @@
             this.saveObjectsButton.TabIndex = 42;
             this.saveObjectsButton.Text = "Save Objects";
             this.saveObjectsButton.UseVisualStyleBackColor = true;
+            this.saveObjectsButton.Click += new System.EventHandler(this.saveObjectsButton_Click_1);
+            // 
+            // realDimensionsTab
+            // 
+            this.realDimensionsTab.Controls.Add(this.button1);
+            this.realDimensionsTab.Controls.Add(this.measureReferenceObjectsButton);
+            this.realDimensionsTab.Location = new System.Drawing.Point(4, 22);
+            this.realDimensionsTab.Name = "realDimensionsTab";
+            this.realDimensionsTab.Size = new System.Drawing.Size(419, 522);
+            this.realDimensionsTab.TabIndex = 4;
+            this.realDimensionsTab.Text = "Real Dimensions";
+            this.realDimensionsTab.UseVisualStyleBackColor = true;
+            // 
+            // measureReferenceObjectsButton
+            // 
+            this.measureReferenceObjectsButton.Location = new System.Drawing.Point(66, 28);
+            this.measureReferenceObjectsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.measureReferenceObjectsButton.Name = "measureReferenceObjectsButton";
+            this.measureReferenceObjectsButton.Size = new System.Drawing.Size(274, 28);
+            this.measureReferenceObjectsButton.TabIndex = 46;
+            this.measureReferenceObjectsButton.Text = "Measure Reference Objects";
+            this.measureReferenceObjectsButton.UseVisualStyleBackColor = true;
+            this.measureReferenceObjectsButton.Click += new System.EventHandler(this.measureReferenceObjectsButton_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(66, 112);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(274, 28);
+            this.button1.TabIndex = 47;
+            this.button1.Text = "Create Tool Masks";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // CalibrationMethodsBox
             // 
@@ -546,18 +574,19 @@
             this.Name = "CalibrationMethodsBox";
             this.Size = new System.Drawing.Size(427, 548);
             calibrationtabControl.ResumeLayout(false);
-            this.thresholdingPage.ResumeLayout(false);
-            this.thresholdingPage.PerformLayout();
-            this.objectApperancePage.ResumeLayout(false);
-            this.objectApperancePage.PerformLayout();
-            this.storeInfo.ResumeLayout(false);
+            this.thresholdingTab.ResumeLayout(false);
+            this.thresholdingTab.PerformLayout();
+            this.objectApperanceTab.ResumeLayout(false);
+            this.objectApperanceTab.PerformLayout();
+            this.storeInfoTab.ResumeLayout(false);
+            this.realDimensionsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabPage thresholdingPage;
+        private System.Windows.Forms.TabPage thresholdingTab;
         private System.Windows.Forms.Button findObjectsButton;
         private System.Windows.Forms.TextBox upperContourTextbox;
         private System.Windows.Forms.Button sortObjectsButton;
@@ -571,7 +600,7 @@
         private System.Windows.Forms.Label lowerTreshholdLabel;
         private System.Windows.Forms.TextBox upperThresholdTextBox;
         private System.Windows.Forms.Label upperTresholdLabel;
-        private System.Windows.Forms.TabPage objectApperancePage;
+        private System.Windows.Forms.TabPage objectApperanceTab;
         private System.Windows.Forms.Label blueColorLabel;
         private System.Windows.Forms.Label redColorRangeLabel;
         private System.Windows.Forms.Label greenColorLabel;
@@ -594,10 +623,12 @@
         private System.Windows.Forms.Label redToTwoLabel;
         private System.Windows.Forms.Button shapeRecoqnitionButton;
         private System.Windows.Forms.Button angleRecognitionButton;
-        private System.Windows.Forms.Button measureRealDimensionsButton;
-        private System.Windows.Forms.TabPage storeInfo;
+        private System.Windows.Forms.TabPage storeInfoTab;
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button saveObjectsButton;
+        private System.Windows.Forms.TabPage realDimensionsTab;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button measureReferenceObjectsButton;
     }
 }

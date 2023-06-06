@@ -184,17 +184,6 @@ namespace VisionSystem.UIComponents
             }
         }
 
-        private void saveObjectsButton_Click(object sender, EventArgs e)
-        {
-            if (VisionController.SmallContoursSorted != null || VisionController.ConnectedContoursSorted != null)
-            {
-                StoredElementOperations.CreateStoredElements(VisionController);
-            }
-            else
-            {
-                MessageBox.Show("No contours stored, find contours first");
-            }
-        }
 
 
         //colors 
@@ -211,7 +200,7 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(redToTextBox.Text))
             {
-                VisionController.ChangeFromRedRange(redToTextBox.Text);
+                VisionController.ChangeToRedRange(redToTextBox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
@@ -220,7 +209,7 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(redFromTwoTextBox.Text))
             {
-                VisionController.ChangeFromRedRange(redFromTwoTextBox.Text);
+                VisionController.ChangeFromTwoRedRange(redFromTwoTextBox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
@@ -229,7 +218,7 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(redToTwoTextbox.Text))
             {
-                VisionController.ChangeFromRedRange(redToTwoTextbox.Text);
+                VisionController.ChangeToTwoRedRange(redToTwoTextbox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
@@ -238,7 +227,7 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(greenFromTextBox.Text))
             {
-                VisionController.ChangeFromRedRange(greenFromTextBox.Text);
+                VisionController.ChangeFromGreenRange(greenFromTextBox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
@@ -247,7 +236,7 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(greenToTextbox.Text))
             {
-                VisionController.ChangeFromRedRange(greenToTextbox.Text);
+                VisionController.ChangeToGreenRange(greenToTextbox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
@@ -256,7 +245,7 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(blueFromTextBox.Text))
             {
-                VisionController.ChangeFromRedRange(blueFromTextBox.Text);
+                VisionController.ChangeFromBlueRange(blueFromTextBox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
@@ -265,16 +254,80 @@ namespace VisionSystem.UIComponents
         {
             if (ValidateInputNumber(blueToTextbox.Text))
             {
-                VisionController.ChangeFromRedRange(blueToTextbox.Text);
+                VisionController.ChangeToBlueRange(blueToTextbox.Text);
             }
             else
                 MessageBox.Show("Please insert a valid number and try again !");
         }
-
         private void checkcolorDetectionButton_Click(object sender, EventArgs e)
         {
-            //validate values if good
-            //pass range values
+            if (VisionController.Contours != null)
+            {
+                Image newImage = ImageOperations.ContoursColorDetection(VisionController);
+                LivePreview.Photo = newImage;
+                ConsolesControl.ConsoleWriteLines("Contours Color detected");
+
+            }
+            else
+            {
+                MessageBox.Show("No contours stored, find contours first");
+            }
+        }
+
+        //shape
+        private void shapeRecoqnitionButton_Click(object sender, EventArgs e)
+        {
+            if (VisionController.Contours != null)
+            {
+                Image newImage = ImageOperations.ContoursShapeDetection(VisionController);
+                LivePreview.Photo = newImage;
+                ConsolesControl.ConsoleWriteLines("Contours Shape detected");
+
+            }
+            else
+            {
+                MessageBox.Show("No contours stored, find contours first");
+            }
+        }
+        //angle
+        private void angleRecognitionButton_Click(object sender, EventArgs e)
+        {
+            if (VisionController.Contours != null)
+            {
+                Image newImage = ImageOperations.ContoursAngleDetection(VisionController);
+                LivePreview.Photo = newImage;
+                ConsolesControl.ConsoleWriteLines("Contours Angle detected");
+
+            }
+            else
+            {
+                MessageBox.Show("No contours stored, find contours first");
+            }
+        }
+
+
+        //Real dimensions tab
+        private void measureReferenceObjectsButton_Click(object sender, EventArgs e)
+        {
+            //TODO real dimenions tab
+        }
+
+
+
+
+
+
+        //information storage
+        private void saveObjectsButton_Click_1(object sender, EventArgs e)
+        {
+            if (VisionController.SmallContoursSorted != null || VisionController.ConnectedContoursSorted != null)
+            {
+                StoredElementOperations.CreateStoredElements(VisionController);
+            }
+            else
+            {
+                MessageBox.Show("No contours stored, find contours first");
+            }
         }
 
     }

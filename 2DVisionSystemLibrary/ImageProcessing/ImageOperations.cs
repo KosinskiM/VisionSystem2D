@@ -1,4 +1,6 @@
-﻿using OpenCvSharp;
+﻿using MathNet.Numerics.LinearAlgebra;
+using NumSharp;
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -233,8 +235,8 @@ namespace VisionSystemLibrary.ImageProcessing
         }
 
 
-
-        public static Mat ContoursColorDetection(VisionSystemController VisionController)
+        //Color detection
+        public static Image ContoursColorDetection(VisionSystemController VisionController)
         {
 
             Mat baseImageCopy = new Mat();
@@ -252,7 +254,7 @@ namespace VisionSystemLibrary.ImageProcessing
             for (int i = 0; i < smallContoursSorted.Length; i++)
             {
                 //TODO
-                //string color = ContourColor(obliczenia, smallContoursSorted[i], Convert.ToInt32(textBox9.Text), Convert.ToInt32(textBox10.Text), Convert.ToInt32(textBox12.Text), Convert.ToInt32(textBox11.Text), Convert.ToInt32(textBox14.Text), Convert.ToInt32(textBox13.Text), Convert.ToInt32(textBox16.Text), Convert.ToInt32(textBox15.Text));
+                string color = ContourColor(smallContoursSorted[i], hsv , VisionController);
 
                 //momenty
                 var M = Cv2.Moments(smallContoursSorted[i], false);
@@ -263,67 +265,326 @@ namespace VisionSystemLibrary.ImageProcessing
                 Scalar col = new Scalar(vector.Item0, vector.Item1, vector.Item2);
 
                 Cv2.Circle(baseImageCopy, center, 3, new Scalar(0, 255, 0), 1);
-                //Cv2.PutText(baseImageCopy, color + " " + Convert.ToString(col.Val1) + " " + Convert.ToString(col.Val2) + " " + Convert.ToString(col.Val3) + " ", smallContours[i][0], HersheyFonts.HersheySimplex, 0.8, new Scalar(255, 0, 0), 1);
 
-
+                string text = color + " " + Convert.ToString(col.Val1) + " " + Convert.ToString(col.Val2) + " " + Convert.ToString(col.Val3);
+                Cv2.PutText(baseImageCopy, text, smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 0.8, new Scalar(255, 0, 0), 1);
             }
-            return baseImageCopy;
-        }
 
+            return Conversion.MatToBitmap(baseImageCopy);
+        }
         public static string ContourColor(OpenCvSharp.Point[] contour, Mat hsv,VisionSystemController VisionController)
         {
-            double formRed = (double)VisionController.FromRed;
+            double fromRed = (double)VisionController.FromRed;
             double toRed = (double)VisionController.ToRed;
-            double fromEwoRed = (double)VisionController.FromTwoRed;
+            double fromTwoRed = (double)VisionController.FromTwoRed;
             double toTwoRed = (double)VisionController.ToTwoRed; 
             double fromGreen = (double)VisionController.FromGreen;
             double toGreen = (double)VisionController.ToGreen;
             double fromBlue = (double)VisionController.FromBlue;
-            double toBlue = (double)VisionController.ToBLue;
+            double toBlue = (double)VisionController.ToBlue;
 
-            //TODO contourcolor method
+            Vec3b vector;
+            OpenCvSharp.Point center;
+            string result = "";
 
-            //Vec3b vector;
-            //OpenCvSharp.Point center;
-            string result="";
-
-            //Cv2.Split(hsv, out Mat[] mv);
-            //mv[2] = mv[2] * 3;
-            //Cv2.Merge(mv, hsv);
+            Cv2.Split(hsv, out Mat[] mv);
+            mv[2] = mv[2] * 3;
+            Cv2.Merge(mv, hsv);
 
 
-            ////momenty
-            //var M = Cv2.Moments(contour, false);
-            //center.X = Convert.ToInt32(M.M10 / M.M00);
-            //center.Y = Convert.ToInt32(M.M01 / M.M00);
+            //momenty
+            var M = Cv2.Moments(contour, false);
+            center.X = Convert.ToInt32(M.M10 / M.M00);
+            center.Y = Convert.ToInt32(M.M01 / M.M00);
 
-            //vector = hsv.At<Vec3b>(center.Y, center.X);
-            //Scalar color = new Scalar(vector.Item0, vector.Item1, vector.Item2);
+            vector = hsv.At<Vec3b>(center.Y, center.X);
+            Scalar color = new Scalar(vector.Item0, vector.Item1, vector.Item2);
 
 
-            ////red
-            //if ((color.Val1 >= low_low_red && color.Val1 <= low_upper_red) ||
-            //  (color.Val1 >= upper_low_red && color.Val1 <= upper_upper_red))
-            //{
-            //    result = "red";
-            //}
-            ////green
-            //else if (color.Val1 >= lower_green && color.Val1 <= upper_green)
-            //{
-            //    result = "green";
-            //}
-            ////blue
-            //else if (color.Val1 > lower_blue && color.Val1 <= upper_blue)
-            //{
-            //    result = "blue";
-            //}
-            //else
-            //{
-            //    result = "none";
-            //}
+            //red
+            if ((color.Val1 >= fromRed && color.Val1 <= toRed) ||
+              (color.Val1 >= fromTwoRed && color.Val1 <= toTwoRed))
+            {
+                result = "red";
+            }
+            //green
+            else if (color.Val1 >= fromGreen && color.Val1 <= toGreen)
+            {
+                result = "green";
+            }
+            //blue
+            else if (color.Val1 > fromBlue && color.Val1 <= toBlue)
+            {
+                result = "blue";
+            }
+            else
+            {
+                result = "none";
+            }
 
             return result;
         }
+
+
+        //shape detection
+        public static Image ContoursShapeDetection(VisionSystemController VisionController)
+        {
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
+
+            OpenCvSharp.Point[][] smallContoursSorted = VisionController.SmallContoursSorted;
+
+            for (int i = 0; i < smallContoursSorted.Length; i++)
+            {
+                string shape;
+                shape = GetContourShape(smallContoursSorted[i]);
+
+                if (shape == "triangle")
+                {
+                    Cv2.PutText(baseImageCopy, "triangle", smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 1, new Scalar(255, 255, 255), 1);
+                }
+                else if (shape == "square")
+                {
+                    Cv2.PutText(baseImageCopy, "square", smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 1, new Scalar(255, 255, 255), 1);
+                }
+                else if (shape == "rectangle")
+                {
+                    Cv2.PutText(baseImageCopy, "rectangle", smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 1, new Scalar(255, 255, 255), 1);
+                }
+                else if (shape == "pentagon")
+                {
+                    Cv2.PutText(baseImageCopy, "pentagon", smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 1, new Scalar(255, 255, 255), 1);
+                }
+                else if (shape == "circle")
+                {
+                    Cv2.PutText(baseImageCopy, "circle", smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 1, new Scalar(255, 255, 255), 1);
+                }
+            }
+            return Conversion.MatToBitmap(baseImageCopy);
+        }
+        public static string GetContourShape(OpenCvSharp.Point[] contour)
+        {
+            string shape;
+            double perimeter;
+            OpenCvSharp.Point[] approx;
+            double A, B, C, w, h, aspectRatio;
+
+            int[] peaks = new int[contour.Length];
+            //smalindex 6 elementow
+            for (int j = 0; j < contour.Length; j++)
+            {
+                float[] sum = new float[contour.Length];
+                float[] diff = new float[contour.Length];
+                for (int i = 0; i < contour.Length; i++)
+                {
+                    sum[i] = contour[i].X + contour[i].Y;
+                    diff[i] = contour[i].X - contour[i].Y;
+                }
+                //wierzcholki
+                peaks[0] = np.argmin(sum);   //topleft
+                peaks[1] = np.argmax(sum);   //bottom right
+                peaks[2] = np.argmin(diff);    //top right
+                peaks[3] = np.argmax(diff);      //bottom left
+            }
+
+            //obwod
+            perimeter = Cv2.ArcLength(contour, true);
+            approx = Cv2.ApproxPolyDP(contour, 0.04 * perimeter, true);
+
+            if (approx.Length == 3)
+            {
+                shape = "triangle";
+            }
+            else if (approx.Length == 4)
+            {
+                //dlugosc odcinka sqrt((x2 - x1)^2 + (y2 - y1)^2)
+                A = Math.Pow((contour[peaks[3]].X - contour[peaks[0]].X), 2);
+                B = Math.Pow((contour[peaks[3]].Y - contour[peaks[0]].Y), 2);
+                C = A + B;
+                w = Math.Sqrt(C);
+                A = Math.Pow((contour[peaks[2]].X - contour[peaks[0]].X), 2);
+                B = Math.Pow((contour[peaks[2]].Y - contour[peaks[0]].Y), 2);
+                C = A + B;
+                h = Math.Sqrt(C);
+                aspectRatio = w / h;
+
+                if (aspectRatio >= 0.95 && aspectRatio <= 1.05)
+                {
+                    shape = "square";  //square kwadrat
+                }
+                else
+                {
+                    shape = "rectangle";  //rectangle prostokat
+                }
+            }
+            else if (approx.Length == 5)
+            {
+                shape = "pentagon"; //pentagon
+            }
+            else
+            {
+                shape = "circle";//circle
+            }
+            return shape;
+        }
+
+
+        //angle detection
+        public static Image ContoursAngleDetection(VisionSystemController VisionController)
+        {
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
+
+            OpenCvSharp.Point[][] smallContoursSorted = VisionController.SmallContoursSorted;
+
+            //nowa metoda
+            Rect r;
+            float ang;
+
+            for (int i = 0; i < smallContoursSorted.Length; i++)
+            {
+                int angle = 0;
+                angle = GetAngle(smallContoursSorted[i]);
+                Cv2.PutText(baseImageCopy, Convert.ToString(angle), smallContoursSorted[i][0], HersheyFonts.HersheySimplex, 0.8, new Scalar(255, 0, 255), 1);
+
+            }
+
+            return Conversion.MatToBitmap(baseImageCopy);
+        }
+        public static int GetAngle(OpenCvSharp.Point[] contour)
+        {
+            float ang;
+            OpenCvSharp.Point center;
+            OpenCvSharp.Point2f[] ftops;
+            OpenCvSharp.Point[] tops = new OpenCvSharp.Point[4];
+
+            //min area rectangle with angle
+            RotatedRect rot = Cv2.MinAreaRect(contour);
+
+            //center
+            var M = Cv2.Moments(contour, false);
+            center.X = Convert.ToInt32(M.M10 / M.M00);
+            center.Y = Convert.ToInt32(M.M01 / M.M00);
+
+            //4 cornery
+            ftops = rot.Points();
+
+            //konwersja na int
+            tops[0].X = Convert.ToInt32(ftops[0].X);
+            tops[0].Y = Convert.ToInt32(ftops[0].Y);
+            tops[1].X = Convert.ToInt32(ftops[1].X);
+            tops[1].Y = Convert.ToInt32(ftops[1].Y);
+            tops[2].X = Convert.ToInt32(ftops[2].X);
+            tops[2].Y = Convert.ToInt32(ftops[2].Y);
+            tops[3].X = Convert.ToInt32(ftops[3].X);
+            tops[3].Y = Convert.ToInt32(ftops[3].Y);
+
+            //poprawka na katy
+            if (rot.Size.Width < rot.Size.Height)
+            {
+                ang = rot.Angle + 90;
+            }
+            else
+            {
+                ang = rot.Angle + 180;
+            }
+
+            //konwersja na inty z float pointa
+            int angle = Convert.ToInt32(ang);
+
+
+            //Rysowanie pomocnicze
+            //Cv2.Circle(imageClone, center, 3, new Scalar(0, 255, 0), 1);
+            //Cv2.Circle(imageClone, tops[0], 3, new Scalar(255, 0, 0), 2);
+            //Cv2.Circle(imageClone, tops[1], 3, new Scalar(255, 0, 0), 2);
+            //Cv2.Circle(imageClone, tops[2], 3, new Scalar(255, 0, 0), 2);
+            //Cv2.Circle(imageClone, tops[3], 3, new Scalar(255, 0, 0), 2);
+
+            return angle;
+        }
+
+
+
+        //Real Dimensions
+
+        public static Image GetReferenceInformation(VisionSystemController VisionController)
+        {
+            //1. pixel permetric
+            //reset
+            Mat greyImage = Conversion.BitmapToMat(ApplyGreyScale(VisionController));
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
+
+            RotatedRect rot;
+            Matrix<double> abcd;
+            OpenCvSharp.Point2f[][] MarkerOut;
+            int[] MarkerId = new int[10];
+            //find markers on image
+            (MarkerOut, MarkerId) = FindArucoMarkers(greyImage);
+
+            OpenCvSharp.Aruco.CvAruco.DrawDetectedMarkers(baseImageCopy, MarkerOut, MarkerId, new Scalar(255, 0, 0));
+
+            string text = "\n>??\n\n " + "X1: " + Convert.ToString(MarkerOut[0][0].X) + "\nY1 = " + Convert.ToString(MarkerOut[0][0].Y) + "\n";
+            Cv2.PutText(baseImageCopy, text, (OpenCvSharp.Point)MarkerOut[0][MarkerOut[0].Length],HersheyFonts.HersheyComplex,2,new Scalar(255,255,255));
+
+            text = "\n>??\n\n " + "X2: " + Convert.ToString(MarkerOut[1][0].X) + "\nY2 = " + Convert.ToString(MarkerOut[1][0].Y) + "\n";
+            Cv2.PutText(baseImageCopy, text, (OpenCvSharp.Point)MarkerOut[0][MarkerOut[0].Length], HersheyFonts.HersheyComplex, 2, new Scalar(255, 255, 255));
+
+            //TODO
+            ////Macierz transforamcji ukladow wsplorzednych
+            //(abcd, ppm) = VISION.coordinatesABCD(MarkerOut, MarkerId);
+
+            //richTextBox3.Text += "\n\nppm : " + Convert.ToString(ppm);
+
+            ////wspolrzedne srodka obietu we wspolrzednych robota
+            //(singleConts, connectedConts) = VISION.mapCoordinates(singleConts, connectedConts, abcd);
+
+            //for (int i = 0; i < singleConts.Length; i++)
+            //{
+            //    Cv2.Circle(baseImageCopy, singleConts[i].center, 2, new Scalar(0, 255, 0));
+            //    Cv2.PutText(baseImageCopy, Convert.ToString(singleConts[i].realCenter), singleConts[i].center, HersheyFonts.HersheySimplex, 0.8, new Scalar(0, 0, 255));
+            //}
+            //for (int i = 0; i < connectedConts.Length; i++)
+            //{
+            //    Cv2.Circle(baseImageCopy, connectedConts[i].center, 2, new Scalar(0, 255, 0));
+            //    Cv2.PutText(baseImageCopy, Convert.ToString(connectedConts[i].realCenter), connectedConts[i].center, HersheyFonts.HersheySimplex, 0.8, new Scalar(0, 0, 255));
+            //}
+
+            //wyswietlenie obrazu ze zmianami        
+            return Conversion.MatToBitmap(baseImageCopy);
+        }
+
+        public static (OpenCvSharp.Point2f[][],int[]) FindArucoMarkers(Mat greyImage)
+        {
+            OpenCvSharp.Point2f[][] Rejected = new OpenCvSharp.Point2f[10][];
+            OpenCvSharp.Point2f[][] MarkerOut;
+            int[] MarkerId = new int[10];
+
+            OpenCvSharp.Aruco.DetectorParameters arucoParam = OpenCvSharp.Aruco.DetectorParameters.Create();
+            OpenCvSharp.Aruco.Dictionary ArucoDict = OpenCvSharp.Aruco.CvAruco.GetPredefinedDictionary(OpenCvSharp.Aruco.PredefinedDictionaryName.Dict4X4_50);
+
+            arucoParam.AdaptiveThreshConstant = 6;
+            arucoParam.AdaptiveThreshWinSizeMin = 3;
+            arucoParam.AdaptiveThreshWinSizeMax = 20;
+            arucoParam.AdaptiveThreshWinSizeStep = 1;
+            arucoParam.PerspectiveRemovePixelPerCell = 10;
+            arucoParam.PerspectiveRemoveIgnoredMarginPerCell = 0.2;
+            arucoParam.MarkerBorderBits = 1;
+            arucoParam.MaxErroneousBitsInBorderRate = 0.35;
+            arucoParam.MaxMarkerPerimeterRate = 40.0;
+            arucoParam.MinCornerDistanceRate = 0.05;
+            arucoParam.MinDistanceToBorder = 3;
+            arucoParam.MinMarkerDistanceRate = 0.05;
+            arucoParam.MinMarkerPerimeterRate = 0.1;
+            arucoParam.MinOtsuStdDev = 5.0;
+            arucoParam.PerspectiveRemoveIgnoredMarginPerCell = 0.13;
+            arucoParam.PerspectiveRemovePixelPerCell = 8;
+
+            OpenCvSharp.Aruco.CvAruco.DetectMarkers(greyImage, ArucoDict, out MarkerOut, out MarkerId, arucoParam, out Rejected);
+
+            return (MarkerOut, MarkerId);
+        }
+
 
 
 

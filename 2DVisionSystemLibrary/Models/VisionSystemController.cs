@@ -78,7 +78,7 @@ namespace VisionSystem.Models
         public double? FromGreen { get; private set; }
         public double? ToGreen { get; private set; }
         public double? FromBlue { get; private set; }
-        public double? ToBLue { get; private set; }
+        public double? ToBlue { get; private set; }
 
         //Contours
         //All contours
@@ -175,10 +175,39 @@ namespace VisionSystem.Models
 
 
         //Colors
-        public void ChangeFromRedRange(string fromRed)
+        public void ChangeFromRedRange(string range)
         {
-            FromRed = Convert.ToDouble(fromRed);
+            FromRed = Convert.ToDouble(range);
         }
+        public void ChangeToRedRange(string range)
+        {
+            ToRed = Convert.ToDouble(range);
+        }
+        public void ChangeFromTwoRedRange(string range)
+        {
+            FromTwoRed = Convert.ToDouble(range);
+        }
+        public void ChangeToTwoRedRange(string range)
+        {
+            ToTwoRed = Convert.ToDouble(range);
+        }
+        public void ChangeFromGreenRange(string range)
+        {
+            FromGreen = Convert.ToDouble(range);
+        }
+        public void ChangeToGreenRange(string range)
+        {
+            ToGreen = Convert.ToDouble(range);
+        }
+        public void ChangeFromBlueRange(string range)
+        {
+            FromBlue = Convert.ToDouble(range);
+        }
+        public void ChangeToBlueRange(string range)
+        {
+            ToBlue = Convert.ToDouble(range);
+        }
+
 
         //events
     }
