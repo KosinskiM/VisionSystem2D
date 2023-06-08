@@ -1,4 +1,5 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
+using MathNet.Numerics.LinearAlgebra.Double;
 using NumSharp;
 using OpenCvSharp;
 using System;
@@ -13,29 +14,42 @@ namespace VisionSystemLibrary.ImageProcessing
 {
     public class ImageOperations
     {
-        public static Image ApplyGreyScale(VisionSystemController VisionController)
+
+        //grey scale
+        public static Image GetGreyScaleImage(VisionSystemController VisionController)
         {
-            Mat baseImageCopy = new Mat();
-            VisionController.BaseImage.CopyTo(baseImageCopy);
+            Mat greyScaleImage = new Mat();
+            greyScaleImage = ConvertToGreyScale(VisionController);
+            VisionController.SetGreyScaleImage(greyScaleImage);
+
+            return Conversion.MatToBitmap(greyScaleImage);
+        }
+
+        public static Mat ConvertToGreyScale(VisionSystemController VisionController)
+        {
+            double lowerThreshold = Convert.ToDouble(VisionController.LowerThreshold);
+            double upperThreshold = Convert.ToDouble(VisionController.UpperThreshold);
+            Mat image = new Mat();
+            VisionController.BaseImage.CopyTo(image);
+
             Mat refGray = new Mat();
             Mat gaus = new Mat();
             Mat thresh = new Mat();
 
-            //TODO prevent thresholding greyscale image !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-            //konwersja na odcienie szarosci
-            Cv2.CvtColor(baseImageCopy, refGray, ColorConversionCodes.BGR2GRAY);
+            Cv2.CvtColor(image, refGray, ColorConversionCodes.BGR2GRAY);
             //blur 
-            OpenCvSharp.Size kernel = new OpenCvSharp.Size(3, 3);
+            //OpenCvSharp.Size kernel = new OpenCvSharp.Size(3, 3);
             //Cv2.GaussianBlur(refGray, gaus, kernel,0,0);
             Cv2.MorphologyEx(refGray, gaus, MorphTypes.Close, null);
-            //tresh 127 - 255
-            Cv2.Threshold(gaus, thresh, (double)VisionController.LowerThreshold, (double)VisionController.UpperThreshold, ThresholdTypes.BinaryInv);
-            VisionController.SetGreyScaleImage(thresh);
-            Image output = Conversion.MatToBitmap(thresh);
+            Cv2.Threshold(gaus, thresh, lowerThreshold, upperThreshold, ThresholdTypes.BinaryInv);
 
-            return output;
+            return thresh;
         }
+
+
+
+
+
         public static Image FindContours(VisionSystemController VisionController)
         {
             Mat baseImageCopy = new Mat();
@@ -509,56 +523,36 @@ namespace VisionSystemLibrary.ImageProcessing
 
         public static Image GetReferenceInformation(VisionSystemController VisionController)
         {
-            //1. pixel permetric
-            //reset
-            Mat greyImage = Conversion.BitmapToMat(ApplyGreyScale(VisionController));
             Mat baseImageCopy = new Mat();
             VisionController.BaseImage.CopyTo(baseImageCopy);
 
             RotatedRect rot;
-            Matrix<double> abcd;
-            OpenCvSharp.Point2f[][] MarkerOut;
+            OpenCvSharp.Point2f[][] markerOut;
+            OpenCvSharp.Point2f[][] rejected;
             int[] MarkerId = new int[10];
-            //find markers on image
-            (MarkerOut, MarkerId) = FindArucoMarkers(greyImage);
 
-            OpenCvSharp.Aruco.CvAruco.DrawDetectedMarkers(baseImageCopy, MarkerOut, MarkerId, new Scalar(255, 0, 0));
+            (markerOut, MarkerId, rejected) = FindArucoMarkers(baseImageCopy);
+            VisionController.SetMarkerOut(markerOut);
+            OpenCvSharp.Aruco.CvAruco.DrawDetectedMarkers(baseImageCopy, markerOut, MarkerId, new Scalar(255, 0, 0));
 
-            string text = "\n>??\n\n " + "X1: " + Convert.ToString(MarkerOut[0][0].X) + "\nY1 = " + Convert.ToString(MarkerOut[0][0].Y) + "\n";
-            Cv2.PutText(baseImageCopy, text, (OpenCvSharp.Point)MarkerOut[0][MarkerOut[0].Length],HersheyFonts.HersheyComplex,2,new Scalar(255,255,255));
+            if (markerOut.Length >= 2)
+            {
+                string text = "\n>??\n\n " + "X1: " + Convert.ToString(markerOut[0][0].X) + "\nY1 = " + Convert.ToString(markerOut[0][0].Y) + "\n";
+                Cv2.PutText(baseImageCopy, text, (OpenCvSharp.Point)markerOut[0][3], HersheyFonts.HersheyComplex, 2, new Scalar(255, 255, 255));
 
-            text = "\n>??\n\n " + "X2: " + Convert.ToString(MarkerOut[1][0].X) + "\nY2 = " + Convert.ToString(MarkerOut[1][0].Y) + "\n";
-            Cv2.PutText(baseImageCopy, text, (OpenCvSharp.Point)MarkerOut[0][MarkerOut[0].Length], HersheyFonts.HersheyComplex, 2, new Scalar(255, 255, 255));
+                text = "\n>??\n\n " + "X2: " + Convert.ToString(markerOut[1][0].X) + "\nY2 = " + Convert.ToString(markerOut[1][0].Y) + "\n";
+                Cv2.PutText(baseImageCopy, text, (OpenCvSharp.Point)markerOut[0][3], HersheyFonts.HersheyComplex, 2, new Scalar(255, 255, 255));
+            }
 
-            //TODO
-            ////Macierz transforamcji ukladow wsplorzednych
-            //(abcd, ppm) = VISION.coordinatesABCD(MarkerOut, MarkerId);
 
-            //richTextBox3.Text += "\n\nppm : " + Convert.ToString(ppm);
-
-            ////wspolrzedne srodka obietu we wspolrzednych robota
-            //(singleConts, connectedConts) = VISION.mapCoordinates(singleConts, connectedConts, abcd);
-
-            //for (int i = 0; i < singleConts.Length; i++)
-            //{
-            //    Cv2.Circle(baseImageCopy, singleConts[i].center, 2, new Scalar(0, 255, 0));
-            //    Cv2.PutText(baseImageCopy, Convert.ToString(singleConts[i].realCenter), singleConts[i].center, HersheyFonts.HersheySimplex, 0.8, new Scalar(0, 0, 255));
-            //}
-            //for (int i = 0; i < connectedConts.Length; i++)
-            //{
-            //    Cv2.Circle(baseImageCopy, connectedConts[i].center, 2, new Scalar(0, 255, 0));
-            //    Cv2.PutText(baseImageCopy, Convert.ToString(connectedConts[i].realCenter), connectedConts[i].center, HersheyFonts.HersheySimplex, 0.8, new Scalar(0, 0, 255));
-            //}
-
-            //wyswietlenie obrazu ze zmianami        
             return Conversion.MatToBitmap(baseImageCopy);
         }
-
-        public static (OpenCvSharp.Point2f[][],int[]) FindArucoMarkers(Mat greyImage)
+        public static (OpenCvSharp.Point2f[][],int[], OpenCvSharp.Point2f[][]) FindArucoMarkers(Mat image)
         {
-            OpenCvSharp.Point2f[][] Rejected = new OpenCvSharp.Point2f[10][];
+            OpenCvSharp.Point2f[][] Rejected;
             OpenCvSharp.Point2f[][] MarkerOut;
             int[] MarkerId = new int[10];
+
 
             OpenCvSharp.Aruco.DetectorParameters arucoParam = OpenCvSharp.Aruco.DetectorParameters.Create();
             OpenCvSharp.Aruco.Dictionary ArucoDict = OpenCvSharp.Aruco.CvAruco.GetPredefinedDictionary(OpenCvSharp.Aruco.PredefinedDictionaryName.Dict4X4_50);
@@ -580,11 +574,119 @@ namespace VisionSystemLibrary.ImageProcessing
             arucoParam.PerspectiveRemoveIgnoredMarginPerCell = 0.13;
             arucoParam.PerspectiveRemovePixelPerCell = 8;
 
-            OpenCvSharp.Aruco.CvAruco.DetectMarkers(greyImage, ArucoDict, out MarkerOut, out MarkerId, arucoParam, out Rejected);
+            OpenCvSharp.Aruco.CvAruco.DetectMarkers(image, ArucoDict, out MarkerOut, out MarkerId, arucoParam, out Rejected);
 
-            return (MarkerOut, MarkerId);
+            return (MarkerOut, MarkerId, Rejected);
         }
 
+
+
+
+        public static Image ShowRealCoordinates(VisionSystemController VisionController)
+        {
+            Mat baseImageCopy = new Mat();
+            VisionController.BaseImage.CopyTo(baseImageCopy);
+
+            OpenCvSharp.Point2f[][] MarkerOut;
+            OpenCvSharp.Point2f[][] Rejected;
+            int[] MarkerId = new int[10];
+            (MarkerOut, MarkerId, Rejected) = FindArucoMarkers(baseImageCopy);
+
+            Matrix<double> abcd;
+            double ppm;
+            (abcd, ppm) = DeterminePixelPerMetric(MarkerOut, MarkerId);
+            VisionController.SetAbcd(abcd);
+            VisionController.SetPpm(ppm);
+            
+            DrawRealCoordinates(baseImageCopy, VisionController);
+
+            return Conversion.MatToBitmap(baseImageCopy);
+        }
+
+        public static (Matrix<double>, double) DeterminePixelPerMetric(OpenCvSharp.Point2f[][] MarkerOut, int[] MarkerId)
+        {
+            //pixels per metric
+            //20 na 20 aruco tag
+            RotatedRect rot = Cv2.MinAreaRect(MarkerOut[0]);
+
+            //calibration point
+            OpenCvSharp.Point odniesienie1 = new OpenCvSharp.Point();
+            OpenCvSharp.Point odniesienie2 = new OpenCvSharp.Point();
+            odniesienie1.X = Convert.ToInt32(MarkerOut[0][0].X);
+            odniesienie1.Y = Convert.ToInt32(MarkerOut[0][0].Y);
+            odniesienie2.X = Convert.ToInt32(MarkerOut[1][0].X);
+            odniesienie2.Y = Convert.ToInt32(MarkerOut[1][0].Y);
+
+            double width = 20;
+            double obwidth = Convert.ToDouble(rot.Size.Height);
+            double obheight = Convert.ToDouble(rot.Size.Width);
+
+            double ppm = obwidth / width;
+            double dimA = obwidth / ppm;
+            double dimB = obheight / ppm;
+
+            //how to map points between 2d coordinate systems
+            //changed x i y, rotated system
+
+
+            // +367.08,-0.09,+209.58,+87.56,+176.32,+603.28,+0.00,R,A,O
+            Matrix<double> u = DenseMatrix.OfArray(new double[,]{
+                {608.88},       //x1
+                {1135.15},      //add1
+                {367.08},       //x2
+                {603.28}        //add2
+            });
+
+            Matrix<double> M = DenseMatrix.OfArray(new double[,]{
+                 { odniesienie2.X,odniesienie2.Y, 1, 0 },
+                 { -odniesienie2.X, odniesienie2.X, 0, 1},
+                 { odniesienie1.X,odniesienie1.Y, 1, 0 },
+                 { -odniesienie1.Y, odniesienie1.X, 0, 1}
+            });
+
+            var Mt = M.Inverse();
+            Matrix<double> abcd = Mt.Multiply(u);
+
+            //mapping
+            //x'=ax+by+c
+            //y'=bx-ay+d
+            return (abcd, ppm);
+        }
+
+        public static void DrawRealCoordinates(Mat baseImageCopy, VisionSystemController VisionController)
+        {
+            Matrix<double> abcd = VisionController.Abcd;
+            double x = 0, y = 0;
+
+            OpenCvSharp.Point[][] smallContoursSorted = VisionController.SmallContoursSorted;
+            OpenCvSharp.Point[][] connectedContoursSorted = VisionController.ConnectedContoursSorted;
+
+
+            for (int i = 0; i < smallContoursSorted.Length; i++)
+            {
+                OpenCvSharp.Point center =  GetCenter(smallContoursSorted[i]);
+                x = center.X;
+                y = center.Y;
+
+                OpenCvSharp.Point2d realCenter;
+                realCenter.Y = (abcd[0, 0] * x + abcd[1, 0] * y + abcd[2, 0]);
+                realCenter.X = abcd[1, 0] * x - abcd[0, 0] * y + abcd[3, 0];
+                Cv2.Circle(baseImageCopy, center, 2, new Scalar(0, 255, 0));
+                Cv2.PutText(baseImageCopy, Convert.ToString(realCenter), center, HersheyFonts.HersheySimplex, 0.8, new Scalar(0, 0, 255));
+            }
+
+            for (int i = 0; i < connectedContoursSorted.Length; i++)
+            {
+                OpenCvSharp.Point center = GetCenter(smallContoursSorted[i]);
+                x = center.X;
+                y = center.Y;
+                OpenCvSharp.Point2d realCenter;
+                realCenter.Y = (abcd[0, 0] * x + abcd[1, 0] * y + abcd[2, 0]);
+                realCenter.X = abcd[1, 0] * x - abcd[0, 0] * y + abcd[3, 0];
+                Cv2.Circle(baseImageCopy, center, 2, new Scalar(0, 255, 0));
+                Cv2.PutText(baseImageCopy, Convert.ToString(realCenter), center, HersheyFonts.HersheySimplex, 0.8, new Scalar(0, 0, 255));
+            }
+        }
 
 
 

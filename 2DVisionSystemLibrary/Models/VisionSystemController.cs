@@ -1,4 +1,5 @@
-﻿using OpenCvSharp;
+﻿using MathNet.Numerics.LinearAlgebra;
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -79,6 +80,13 @@ namespace VisionSystem.Models
         public double? ToGreen { get; private set; }
         public double? FromBlue { get; private set; }
         public double? ToBlue { get; private set; }
+
+
+        //real values properties
+        public OpenCvSharp.Point2f[][] MarkerOut { get; set; }
+        public double? Ppm { get; set; }
+        public Matrix<double> Abcd { get; set; }
+
 
         //Contours
         //All contours
@@ -206,6 +214,23 @@ namespace VisionSystem.Models
         public void ChangeToBlueRange(string range)
         {
             ToBlue = Convert.ToDouble(range);
+        }
+
+
+        //real values
+        public void SetPpm(double ppm)
+        {
+            Ppm = Ppm;
+        }
+
+        public void SetAbcd(Matrix<double> abcd)
+        {
+            Abcd = abcd;
+        }
+
+        public void SetMarkerOut(OpenCvSharp.Point2f[][] markerOut)
+        {
+            MarkerOut = markerOut;
         }
 
 

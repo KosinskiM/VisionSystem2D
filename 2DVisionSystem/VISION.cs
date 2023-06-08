@@ -457,8 +457,7 @@ namespace Clear_version_robotApp
             Mat thresh = new Mat();
             //konwersja na odcienie szarosci
             Cv2.CvtColor(wejthresh, refGray, ColorConversionCodes.BGR2GRAY);
-            //blur 
-            OpenCvSharp.Size kernel = new OpenCvSharp.Size(3, 3);
+
             //Cv2.GaussianBlur(refGray, gaus, kernel,0,0);
             Cv2.MorphologyEx(refGray, gaus, MorphTypes.Close, null);
             //tresh 127 - 255

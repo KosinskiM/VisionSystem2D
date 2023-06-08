@@ -66,19 +66,20 @@
             this.redToLabel = new System.Windows.Forms.Label();
             this.greenFromTextBox = new System.Windows.Forms.TextBox();
             this.redToTwoLabel = new System.Windows.Forms.Label();
+            this.realDimensionsTab = new System.Windows.Forms.TabPage();
+            this.showToolMasksButton = new System.Windows.Forms.Button();
+            this.measureReferenceObjectsButton = new System.Windows.Forms.Button();
             this.storeInfoTab = new System.Windows.Forms.TabPage();
             this.button15 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
             this.saveObjectsButton = new System.Windows.Forms.Button();
-            this.realDimensionsTab = new System.Windows.Forms.TabPage();
-            this.measureReferenceObjectsButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.showRealCoordinatesButton = new System.Windows.Forms.Button();
             calibrationtabControl = new System.Windows.Forms.TabControl();
             calibrationtabControl.SuspendLayout();
             this.thresholdingTab.SuspendLayout();
             this.objectApperanceTab.SuspendLayout();
-            this.storeInfoTab.SuspendLayout();
             this.realDimensionsTab.SuspendLayout();
+            this.storeInfoTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // calibrationtabControl
@@ -491,6 +492,40 @@
             this.redToTwoLabel.TabIndex = 25;
             this.redToTwoLabel.Text = "to (180)";
             // 
+            // realDimensionsTab
+            // 
+            this.realDimensionsTab.Controls.Add(this.showRealCoordinatesButton);
+            this.realDimensionsTab.Controls.Add(this.showToolMasksButton);
+            this.realDimensionsTab.Controls.Add(this.measureReferenceObjectsButton);
+            this.realDimensionsTab.Location = new System.Drawing.Point(4, 22);
+            this.realDimensionsTab.Name = "realDimensionsTab";
+            this.realDimensionsTab.Size = new System.Drawing.Size(419, 522);
+            this.realDimensionsTab.TabIndex = 4;
+            this.realDimensionsTab.Text = "Real Dimensions";
+            this.realDimensionsTab.UseVisualStyleBackColor = true;
+            // 
+            // showToolMasksButton
+            // 
+            this.showToolMasksButton.Location = new System.Drawing.Point(66, 115);
+            this.showToolMasksButton.Margin = new System.Windows.Forms.Padding(2);
+            this.showToolMasksButton.Name = "showToolMasksButton";
+            this.showToolMasksButton.Size = new System.Drawing.Size(274, 28);
+            this.showToolMasksButton.TabIndex = 47;
+            this.showToolMasksButton.Text = "Show Tool Masks";
+            this.showToolMasksButton.UseVisualStyleBackColor = true;
+            this.showToolMasksButton.Click += new System.EventHandler(this.showToolMasksButton_Click);
+            // 
+            // measureReferenceObjectsButton
+            // 
+            this.measureReferenceObjectsButton.Location = new System.Drawing.Point(66, 28);
+            this.measureReferenceObjectsButton.Margin = new System.Windows.Forms.Padding(2);
+            this.measureReferenceObjectsButton.Name = "measureReferenceObjectsButton";
+            this.measureReferenceObjectsButton.Size = new System.Drawing.Size(274, 28);
+            this.measureReferenceObjectsButton.TabIndex = 46;
+            this.measureReferenceObjectsButton.Text = "Measure Reference Objects";
+            this.measureReferenceObjectsButton.UseVisualStyleBackColor = true;
+            this.measureReferenceObjectsButton.Click += new System.EventHandler(this.measureReferenceObjectsButton_Click);
+            // 
             // storeInfoTab
             // 
             this.storeInfoTab.Controls.Add(this.button15);
@@ -534,37 +569,16 @@
             this.saveObjectsButton.UseVisualStyleBackColor = true;
             this.saveObjectsButton.Click += new System.EventHandler(this.saveObjectsButton_Click_1);
             // 
-            // realDimensionsTab
+            // showRealCoordinatesButton
             // 
-            this.realDimensionsTab.Controls.Add(this.button1);
-            this.realDimensionsTab.Controls.Add(this.measureReferenceObjectsButton);
-            this.realDimensionsTab.Location = new System.Drawing.Point(4, 22);
-            this.realDimensionsTab.Name = "realDimensionsTab";
-            this.realDimensionsTab.Size = new System.Drawing.Size(419, 522);
-            this.realDimensionsTab.TabIndex = 4;
-            this.realDimensionsTab.Text = "Real Dimensions";
-            this.realDimensionsTab.UseVisualStyleBackColor = true;
-            // 
-            // measureReferenceObjectsButton
-            // 
-            this.measureReferenceObjectsButton.Location = new System.Drawing.Point(66, 28);
-            this.measureReferenceObjectsButton.Margin = new System.Windows.Forms.Padding(2);
-            this.measureReferenceObjectsButton.Name = "measureReferenceObjectsButton";
-            this.measureReferenceObjectsButton.Size = new System.Drawing.Size(274, 28);
-            this.measureReferenceObjectsButton.TabIndex = 46;
-            this.measureReferenceObjectsButton.Text = "Measure Reference Objects";
-            this.measureReferenceObjectsButton.UseVisualStyleBackColor = true;
-            this.measureReferenceObjectsButton.Click += new System.EventHandler(this.measureReferenceObjectsButton_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(66, 112);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(274, 28);
-            this.button1.TabIndex = 47;
-            this.button1.Text = "Create Tool Masks";
-            this.button1.UseVisualStyleBackColor = true;
+            this.showRealCoordinatesButton.Location = new System.Drawing.Point(66, 72);
+            this.showRealCoordinatesButton.Margin = new System.Windows.Forms.Padding(2);
+            this.showRealCoordinatesButton.Name = "showRealCoordinatesButton";
+            this.showRealCoordinatesButton.Size = new System.Drawing.Size(274, 28);
+            this.showRealCoordinatesButton.TabIndex = 48;
+            this.showRealCoordinatesButton.Text = "Show Real Coordinates";
+            this.showRealCoordinatesButton.UseVisualStyleBackColor = true;
+            this.showRealCoordinatesButton.Click += new System.EventHandler(this.showRealCoordinatesButton_Click);
             // 
             // CalibrationMethodsBox
             // 
@@ -578,8 +592,8 @@
             this.thresholdingTab.PerformLayout();
             this.objectApperanceTab.ResumeLayout(false);
             this.objectApperanceTab.PerformLayout();
-            this.storeInfoTab.ResumeLayout(false);
             this.realDimensionsTab.ResumeLayout(false);
+            this.storeInfoTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -628,7 +642,8 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button saveObjectsButton;
         private System.Windows.Forms.TabPage realDimensionsTab;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button showToolMasksButton;
         private System.Windows.Forms.Button measureReferenceObjectsButton;
+        private System.Windows.Forms.Button showRealCoordinatesButton;
     }
 }

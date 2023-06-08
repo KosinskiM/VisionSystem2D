@@ -114,7 +114,7 @@ namespace VisionSystem.UIComponents
         {
             if (VisionController.BaseImage != null)
             {
-                Image newImage = ImageOperations.ApplyGreyScale(VisionController);
+                Image newImage = ImageOperations.GetGreyScaleImage(VisionController);
                 LivePreview.Photo = newImage;
                 ConsolesControl.ConsoleWriteLines("Threshold applied");
             }
@@ -310,11 +310,37 @@ namespace VisionSystem.UIComponents
         private void measureReferenceObjectsButton_Click(object sender, EventArgs e)
         {
             //TODO real dimenions tab
+
+            if (VisionController.BaseImage != null)
+            {
+                Image newImage = ImageOperations.GetReferenceInformation(VisionController);
+                LivePreview.Photo = newImage;
+                ConsolesControl.ConsoleWriteLines("Reference information stored");
+
+            }
+            else
+            {
+                MessageBox.Show("No image stored, please take a photo or load sample image and try again");
+            }
+        }
+        private void showRealCoordinatesButton_Click(object sender, EventArgs e)
+        {
+            if (VisionController.SmallContoursSorted != null || VisionController.ConnectedContoursSorted != null)
+            {
+                Image newImage = ImageOperations.ShowRealCoordinates(VisionController);
+                LivePreview.Photo = newImage;
+                ConsolesControl.ConsoleWriteLines("Real coordinates shown");
+            }
+            else
+            {
+                MessageBox.Show("Please determine and sort objects first !");
+            }
         }
 
-
-
-
+        private void showToolMasksButton_Click(object sender, EventArgs e)
+        {
+            //TODO
+        }
 
 
         //information storage

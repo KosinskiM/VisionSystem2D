@@ -465,23 +465,23 @@ namespace Clear_version_robotApp
                 {
                     case "sample photo 1":
                         {
-                            wej = Cv2.ImRead(@"C:\Users\MKPC\Desktop\PINZ\sample\test1.jpg", ImreadModes.Unchanged);
+                            wej = Cv2.ImRead(@"C:\Projects\2DVisionSystem\sample\test1.jpg", ImreadModes.Unchanged);
                         }
                         break;
 
                     case "sample photo 2":
                         {
-                            wej = Cv2.ImRead(@"C:\Users\MKPC\Desktop\PINZ\sample\sample2.jpg", ImreadModes.Unchanged);
+                            wej = Cv2.ImRead(@"C:\Projects\2DVisionSystem\sample\sample2.jpg", ImreadModes.Unchanged);
                         }
                         break;
                     case "sample photo 3":
                         {
-                            wej = Cv2.ImRead(@"C:\Users\MKPC\Desktop\PINZ\sample\sample3.jpg", ImreadModes.Unchanged);
+                            wej = Cv2.ImRead(@"C:\Projects\2DVisionSystem\sample\sample3.jpg", ImreadModes.Unchanged);
                         }
                         break;
                     case "sample photo 4":
                         {
-                            wej = Cv2.ImRead(@"C:\Users\MKPC\Desktop\PINZ\sample\sample4.jpg", ImreadModes.Unchanged);
+                            wej = Cv2.ImRead(@"C:\Projects\2DVisionSystem\sample\sample4.jpg", ImreadModes.Unchanged);
                         }
                         break;
                 }
